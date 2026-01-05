@@ -1,0 +1,17 @@
+.connection-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.connection-lines line {
+  transition: opacity 0.3s ease;
+}
+
+.connection-lines:hover line {
+  opacity: 1;
+}

@@ -8,7 +8,7 @@ const AverageDisplay: React.FC<AverageDisplayProps> = ({ value, label }) => {
   const formattedValue = formatNumber(value, 2);
 
   return (
-    <div className="average-display">
+    <div className="average-display" data-output-id={label}>
       <span className="average-label">{label}:</span>
       <span className="average-value">{formattedValue}</span>
     </div>

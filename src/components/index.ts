@@ -3,3 +3,4 @@ export { default as AverageDisplay } from './AverageDisplay';
 export { default as DateHeader } from './DateHeader';
 export { default as CalculatorGroup } from './CalculatorGroup';
 export { default as CalculatorColumn } from './CalculatorColumn';
+export { default as ConnectionLines } from './ConnectionLines';
