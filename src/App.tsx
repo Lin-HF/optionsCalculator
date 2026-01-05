@@ -1,7 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { CalculatorColumn } from './components';
-import ConnectionLines from './components/ConnectionLines';
 import { InputValues } from './types';
 import { 
   validateConfiguration
@@ -10,9 +9,6 @@ import {
 function App() {
   // Validate configuration on app initialization
   validateConfiguration();
-
-  // Ref for the main container to calculate connection lines
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Global state management for all input values
   const [inputValues, setInputValues] = useState<InputValues>({
@@ -50,10 +46,7 @@ function App() {
   return (
     <div className="app">
       {/* Three-column layout structure */}
-      <div className="app-container" ref={containerRef}>
-        {/* Connection lines overlay */}
-        <ConnectionLines containerRef={containerRef} />
-        
+      <div className="app-container">
         {/* Left column - 本周五 */}
         <CalculatorColumn
           weekOffset={0}

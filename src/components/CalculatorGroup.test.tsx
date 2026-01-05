@@ -80,12 +80,16 @@ describe('CalculatorGroup', () => {
     expect(screen.getByText('A3:')).toBeInTheDocument();
     expect(screen.getByText('C2:')).toBeInTheDocument();
     
-    // Check positioning classes
+    // Check that outputs are rendered in the output column
     const rightOutput = screen.getByText('A3:').closest('.output-container');
     const leftOutput = screen.getByText('C2:').closest('.output-container');
     
-    expect(rightOutput).toHaveClass('output-right');
-    expect(leftOutput).toHaveClass('output-left');
+    expect(rightOutput).toHaveClass('output-container');
+    expect(leftOutput).toHaveClass('output-container');
+    
+    // Check that they are in the output column
+    const outputColumn = screen.getByText('A3:').closest('.output-column');
+    expect(outputColumn).toBeInTheDocument();
   });
 
   it('handles empty input values correctly', () => {
@@ -125,11 +129,23 @@ describe('CalculatorGroup', () => {
     const calculatorGroup = screen.getByText('A1').closest('.calculator-group');
     expect(calculatorGroup).toHaveClass('calculator-group');
     
+    // Check for the new grid layout structure
+    const inputsColumn = screen.getByText('A1').closest('.inputs-column');
+    expect(inputsColumn).toHaveClass('inputs-column');
+    
     const input1Container = screen.getByText('A1').closest('.input-container');
-    expect(input1Container).toHaveClass('input-1');
+    expect(input1Container).toHaveClass('input-container');
     
     const input2Container = screen.getByText('A2').closest('.input-container');
-    expect(input2Container).toHaveClass('input-2');
+    expect(input2Container).toHaveClass('input-container');
+    
+    // Check for arrow column
+    const arrowColumn = calculatorGroup?.querySelector('.arrow-column');
+    expect(arrowColumn).toBeInTheDocument();
+    
+    // Check for output column
+    const outputColumn = calculatorGroup?.querySelector('.output-column');
+    expect(outputColumn).toBeInTheDocument();
   });
 
   // Property-based tests

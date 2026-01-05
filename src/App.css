@@ -8,7 +8,6 @@
 
 /* Enhanced three-column layout structure for desktop */
 .app-container {
-  position: relative; /* Added for connection lines positioning */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2.5rem;
