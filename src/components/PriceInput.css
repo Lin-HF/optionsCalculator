@@ -43,3 +43,30 @@
 .price-input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* Tablet responsive design */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .price-input {
+    width: 75px;
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+  .price-input {
+    width: 70px;
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .price-input {
+    width: 65px;
+    padding: 5px 6px;
+    font-size: 12px;
+  }
+}

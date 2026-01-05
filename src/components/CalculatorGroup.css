@@ -6,7 +6,8 @@
   padding: 1rem;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  background-color: #fafafa;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Input containers */
@@ -61,7 +62,7 @@
   left: 80px;
   right: 80px;
   height: 1px;
-  background-color: #ccc;
+  background-color: #ddd;
   transform: translateY(-50%);
   z-index: 0;
 }
@@ -70,15 +71,44 @@
 .input-container,
 .output-container {
   z-index: 1;
-  background-color: #fafafa;
+  background-color: #ffffff;
   padding: 0.25rem;
   border-radius: 4px;
 }
 
-/* Responsive adjustments */
+/* Tablet responsive adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .calculator-group {
+    min-height: 180px;
+    margin-bottom: 1.75rem;
+    padding: 0.875rem;
+  }
+  
+  .input-1 {
+    top: 18px;
+    left: 18px;
+  }
+  
+  .input-2 {
+    top: 70px;
+    left: 18px;
+  }
+  
+  .output-left {
+    top: 44px;
+    left: 110px;
+  }
+  
+  .output-right {
+    top: 44px;
+    right: 18px;
+  }
+}
+
+/* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .calculator-group {
-    min-height: 150px;
+    min-height: 160px;
     margin-bottom: 1.5rem;
     padding: 0.75rem;
   }
@@ -89,17 +119,56 @@
   }
   
   .input-2 {
-    top: 60px;
+    top: 65px;
     left: 15px;
   }
   
   .output-left {
-    top: 37.5px;
+    top: 40px;
     left: 100px;
   }
   
   .output-right {
-    top: 37.5px;
+    top: 40px;
     right: 15px;
+  }
+  
+  .calculator-group::before {
+    left: 75px;
+    right: 75px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .calculator-group {
+    min-height: 140px;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem;
+  }
+  
+  .input-1 {
+    top: 12px;
+    left: 12px;
+  }
+  
+  .input-2 {
+    top: 55px;
+    left: 12px;
+  }
+  
+  .output-left {
+    top: 33.5px;
+    left: 85px;
+  }
+  
+  .output-right {
+    top: 33.5px;
+    right: 12px;
+  }
+  
+  .calculator-group::before {
+    left: 65px;
+    right: 65px;
   }
 }

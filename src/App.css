@@ -2,9 +2,10 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  min-height: 100vh;
 }
 
-/* Three-column layout structure */
+/* Three-column layout structure for desktop */
 .app-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -12,18 +13,46 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: calc(100vh - 4rem);
+  align-items: start;
 }
 
-/* Responsive design for mobile devices */
+/* Tablet layout - maintain three columns but with smaller gaps */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .app-container {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .app {
+    padding: 1.5rem;
+  }
+}
+
+/* Mobile layout - vertical stacking */
 @media (max-width: 768px) {
   .app-container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding: 1rem;
+    min-height: auto;
   }
   
   .app {
     padding: 1rem;
+    min-height: 100vh;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .app-container {
+    gap: 1.5rem;
+    padding: 0.75rem;
+  }
+  
+  .app {
+    padding: 0.75rem;
   }
 }

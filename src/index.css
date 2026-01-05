@@ -24,8 +24,29 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: auto;
 }
 
 #root {
   width: 100%;
+  min-height: 100vh;
+}
+
+/* Ensure smooth scrolling on all devices */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve touch targets on mobile devices */
+@media (max-width: 768px) {
+  button, input, select, textarea {
+    min-height: 44px;
+  }
+}
+
+/* Prevent horizontal scrolling on small screens */
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
 }

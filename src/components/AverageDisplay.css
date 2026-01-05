@@ -29,7 +29,19 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Responsive adjustments */
+/* Tablet responsive design */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .average-display {
+    font-size: 13px;
+    min-width: 75px;
+  }
+  
+  .average-value {
+    min-width: 38px;
+  }
+}
+
+/* Mobile responsive design */
 @media (max-width: 768px) {
   .average-display {
     font-size: 13px;
@@ -38,5 +50,18 @@
   
   .average-value {
     min-width: 35px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .average-display {
+    font-size: 12px;
+    min-width: 65px;
+    gap: 3px;
+  }
+  
+  .average-value {
+    min-width: 32px;
   }
 }
