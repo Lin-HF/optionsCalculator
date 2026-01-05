@@ -40,19 +40,7 @@ export type CalculationConfig = {
   };
 };
 
-// Default calculation configuration
-export const CALCULATIONS: CalculationConfig = {
-  A3: { inputs: ['A1', 'A2'], position: 'right' },
-  C2: { inputs: ['A2', 'C1'], position: 'left' },
-  E3: { inputs: ['E1', 'E2'], position: 'right' },
-  F2: { inputs: ['E1', 'F1'], position: 'left' },
-  B3: { inputs: ['B1', 'B2'], position: 'right' },
-  D2: { inputs: ['B2', 'D1'], position: 'left' },
-  H3: { inputs: ['H1', 'H2'], position: 'right' },
-  G2: { inputs: ['G1', 'H1'], position: 'left' },
-  I3: { inputs: ['I1', 'I2'], position: 'right' },
-  J3: { inputs: ['J1', 'J2'], position: 'right' },
-};
+// Note: CALCULATIONS configuration moved to src/config/calculatorConfig.ts
 
 // Component prop interfaces
 export interface AppProps {}
