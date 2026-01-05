@@ -1,87 +1,222 @@
-/* CalculatorGroup component styles */
+/* CalculatorGroup component styles - Enhanced for precise hand-drawn design matching */
 .calculator-group {
   position: relative;
-  min-height: 200px;
+  min-height: 160px;
   margin-bottom: 2rem;
-  padding: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  padding: 1.5rem;
   background-color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  /* Subtle border to define the calculator group area */
+  border: 1px solid #f0f0f0;
+  /* Clean, minimal shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Input containers */
+/* Input containers - Positioned to match hand-drawn design */
 .input-container {
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
+  z-index: 2;
 }
 
+/* Precise positioning based on hand-drawn design */
 .input-1 {
-  top: 20px;
-  left: 20px;
+  top: 25px;
+  left: 25px;
 }
 
 .input-2 {
-  top: 80px;
-  left: 20px;
+  top: 85px;
+  left: 25px;
 }
 
-/* Input labels */
+/* Input labels - Clean, minimal styling */
 .input-label {
   font-size: 0.75rem;
-  font-weight: 500;
-  color: #666;
+  font-weight: 600;
+  color: #555;
   text-align: center;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
 }
 
-/* Output containers */
+/* Output containers - Positioned for clear visual connection */
 .output-container {
   position: absolute;
   display: flex;
   align-items: center;
+  z-index: 2;
+  background-color: #ffffff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  /* Subtle background to make outputs stand out */
+  background-color: #fafafa;
+  border: 1px solid #e8e8e8;
 }
 
+/* Output positioning - Matching hand-drawn design */
 .output-left {
-  top: 50px;
-  left: 120px;
+  top: 55px;
+  left: 140px;
 }
 
 .output-right {
-  top: 50px;
-  right: 20px;
+  top: 55px;
+  right: 25px;
 }
 
-/* Visual connection lines (optional enhancement) */
+/* Enhanced visual connection lines with directional indicators */
 .calculator-group::before {
   content: '';
   position: absolute;
   top: 50%;
-  left: 80px;
-  right: 80px;
-  height: 1px;
-  background-color: #ddd;
+  left: 110px;
+  right: 110px;
+  height: 2px;
+  background: linear-gradient(90deg, #ddd 0%, #bbb 50%, #ddd 100%);
   transform: translateY(-50%);
   z-index: 0;
+  border-radius: 1px;
 }
 
-/* Ensure components are above connection lines */
-.input-container,
-.output-container {
-  z-index: 1;
-  background-color: #ffffff;
-  padding: 0.25rem;
-  border-radius: 4px;
+/* Connection lines from inputs to center with subtle animation */
+.calculator-group::after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 110px;
+  width: 2px;
+  background: linear-gradient(180deg, #ddd 0%, #bbb 50%, #ddd 100%);
+  z-index: 0;
+  border-radius: 1px;
 }
 
-/* Tablet responsive adjustments */
+/* Add subtle directional arrows for better visual flow */
+.output-container::before {
+  content: '→';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bbb;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.output-left::before {
+  content: '←';
+  left: auto;
+  right: -15px;
+}
+
+/* Tablet responsive adjustments - Maintain proportional positioning */
 @media (max-width: 1024px) and (min-width: 769px) {
   .calculator-group {
-    min-height: 180px;
+    min-height: 150px;
     margin-bottom: 1.75rem;
-    padding: 0.875rem;
+    padding: 1.25rem;
+  }
+  
+  .input-1 {
+    top: 22px;
+    left: 22px;
+  }
+  
+  .input-2 {
+    top: 78px;
+    left: 22px;
+  }
+  
+  .output-left {
+    top: 50px;
+    left: 130px;
+  }
+  
+  .output-right {
+    top: 50px;
+    right: 22px;
+  }
+  
+  .calculator-group::before {
+    left: 105px;
+    right: 105px;
+  }
+  
+  .calculator-group::after {
+    left: 105px;
+    top: 37px;
+    bottom: 37px;
+  }
+  
+  .output-container::before {
+    font-size: 11px;
+    left: -13px;
+  }
+  
+  .output-left::before {
+    right: -13px;
+  }
+}
+
+/* Mobile responsive adjustments - Maintain visual hierarchy */
+@media (max-width: 768px) {
+  .calculator-group {
+    min-height: 140px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .input-1 {
+    top: 20px;
+    left: 20px;
+  }
+  
+  .input-2 {
+    top: 75px;
+    left: 20px;
+  }
+  
+  .output-left {
+    top: 47.5px;
+    left: 115px;
+  }
+  
+  .output-right {
+    top: 47.5px;
+    right: 20px;
+  }
+  
+  .calculator-group::before {
+    left: 95px;
+    right: 95px;
+  }
+  
+  .calculator-group::after {
+    left: 95px;
+    top: 35px;
+    bottom: 35px;
+  }
+  
+  .output-container::before {
+    font-size: 10px;
+    left: -12px;
+  }
+  
+  .output-left::before {
+    right: -12px;
+  }
+}
+
+/* Small mobile devices - Compact but clear layout */
+@media (max-width: 480px) {
+  .calculator-group {
+    min-height: 130px;
+    margin-bottom: 1.25rem;
+    padding: 0.75rem;
   }
   
   .input-1 {
@@ -96,79 +231,31 @@
   
   .output-left {
     top: 44px;
-    left: 110px;
+    left: 100px;
   }
   
   .output-right {
     top: 44px;
     right: 18px;
   }
-}
-
-/* Mobile responsive adjustments */
-@media (max-width: 768px) {
-  .calculator-group {
-    min-height: 160px;
-    margin-bottom: 1.5rem;
-    padding: 0.75rem;
-  }
-  
-  .input-1 {
-    top: 15px;
-    left: 15px;
-  }
-  
-  .input-2 {
-    top: 65px;
-    left: 15px;
-  }
-  
-  .output-left {
-    top: 40px;
-    left: 100px;
-  }
-  
-  .output-right {
-    top: 40px;
-    right: 15px;
-  }
   
   .calculator-group::before {
-    left: 75px;
-    right: 75px;
-  }
-}
-
-/* Small mobile devices */
-@media (max-width: 480px) {
-  .calculator-group {
-    min-height: 140px;
-    margin-bottom: 1.25rem;
-    padding: 0.5rem;
-  }
-  
-  .input-1 {
-    top: 12px;
-    left: 12px;
-  }
-  
-  .input-2 {
-    top: 55px;
-    left: 12px;
-  }
-  
-  .output-left {
-    top: 33.5px;
     left: 85px;
+    right: 85px;
   }
   
-  .output-right {
-    top: 33.5px;
-    right: 12px;
+  .calculator-group::after {
+    left: 85px;
+    top: 33px;
+    bottom: 33px;
   }
   
-  .calculator-group::before {
-    left: 65px;
-    right: 65px;
+  .output-container::before {
+    font-size: 9px;
+    left: -10px;
+  }
+  
+  .output-left::before {
+    right: -10px;
   }
 }

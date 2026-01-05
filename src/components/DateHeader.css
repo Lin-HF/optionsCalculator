@@ -1,56 +1,63 @@
-/* DateHeader component styles */
+/* DateHeader component styles - Enhanced for better visual hierarchy */
 .date-header {
   text-align: center;
-  margin-bottom: 1.5rem;
-  padding: 1rem 0;
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .date-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #212529;
   margin: 0;
-  padding: 0.5rem;
-  border-bottom: 2px solid #e5e5e5;
+  padding: 0.75rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.5px;
+  /* Enhanced visual emphasis */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Tablet responsive design */
+/* Tablet responsive design - Maintain visual hierarchy */
 @media (max-width: 1024px) and (min-width: 769px) {
+  .date-header {
+    margin-bottom: 1.75rem;
+    padding: 1.25rem 0;
+  }
+  
+  .date-title {
+    font-size: 1.25rem;
+    padding: 0.65rem;
+  }
+}
+
+/* Mobile responsive design - Maintain readability */
+@media (max-width: 768px) {
+  .date-header {
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  .date-title {
+    font-size: 1.15rem;
+    padding: 0.5rem;
+  }
+}
+
+/* Small mobile devices - Compact but clear */
+@media (max-width: 480px) {
   .date-header {
     margin-bottom: 1.25rem;
     padding: 0.75rem 0;
   }
   
   .date-title {
-    font-size: 1.15rem;
-  }
-}
-
-/* Mobile responsive design */
-@media (max-width: 768px) {
-  .date-header {
-    margin-bottom: 1rem;
-    padding: 0.5rem 0;
-  }
-  
-  .date-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     padding: 0.4rem;
-  }
-}
-
-/* Small mobile devices */
-@media (max-width: 480px) {
-  .date-header {
-    margin-bottom: 0.75rem;
-    padding: 0.4rem 0;
-  }
-  
-  .date-title {
-    font-size: 1rem;
-    padding: 0.3rem;
   }
 }

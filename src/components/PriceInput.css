@@ -1,36 +1,43 @@
 .price-input {
-  /* Red border as specified in requirements 5.1 and 7.1 */
+  /* Enhanced red border as specified in requirements 5.1 and 7.1 */
   border: 2px solid #dc3545;
-  border-radius: 4px;
-  padding: 8px 12px;
+  border-radius: 6px;
+  padding: 10px 14px;
   font-size: 14px;
   font-family: inherit;
-  width: 80px;
+  font-weight: 500;
+  width: 85px;
   text-align: center;
-  background-color: white;
+  background-color: #ffffff;
   
   /* Remove default input styling */
   outline: none;
   box-sizing: border-box;
   
-  /* Transition for smooth interactions */
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  /* Enhanced transition for smooth interactions */
+  transition: all 0.2s ease-in-out;
+  
+  /* Ensure text is clearly visible */
+  color: #333;
 }
 
 .price-input:focus {
-  /* Slightly darker red border on focus for better UX */
+  /* More prominent red border on focus for better UX */
   border-color: #c82333;
-  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+  background-color: #ffffff;
 }
 
 .price-input:hover {
-  /* Subtle hover effect */
+  /* Subtle hover effect with enhanced border */
   border-color: #c82333;
+  box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.1);
 }
 
 .price-input::placeholder {
-  color: #6c757d;
-  opacity: 0.7;
+  color: #999;
+  opacity: 0.8;
+  font-weight: 400;
 }
 
 /* Ensure consistent styling across browsers */
@@ -44,29 +51,29 @@
   -moz-appearance: textfield;
 }
 
-/* Tablet responsive design */
+/* Tablet responsive design - Maintain enhanced styling */
 @media (max-width: 1024px) and (min-width: 769px) {
   .price-input {
-    width: 75px;
-    padding: 7px 10px;
+    width: 80px;
+    padding: 9px 12px;
     font-size: 13px;
   }
 }
 
-/* Mobile responsive design */
+/* Mobile responsive design - Maintain clarity */
 @media (max-width: 768px) {
   .price-input {
-    width: 70px;
-    padding: 6px 8px;
+    width: 75px;
+    padding: 8px 10px;
     font-size: 13px;
   }
 }
 
-/* Small mobile devices */
+/* Small mobile devices - Compact but usable */
 @media (max-width: 480px) {
   .price-input {
-    width: 65px;
-    padding: 5px 6px;
+    width: 70px;
+    padding: 7px 8px;
     font-size: 12px;
   }
 }

@@ -1,58 +1,67 @@
 .app {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
   min-height: 100vh;
+  background-color: #f5f6fa;
 }
 
-/* Three-column layout structure for desktop */
+/* Enhanced three-column layout structure for desktop */
 .app-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
   padding: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   min-height: calc(100vh - 4rem);
   align-items: start;
+  /* Enhanced background for better visual separation */
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
 }
 
-/* Tablet layout - maintain three columns but with smaller gaps */
+/* Tablet layout - maintain three columns but with adjusted spacing */
 @media (max-width: 1024px) and (min-width: 769px) {
   .app-container {
-    gap: 1.5rem;
-    padding: 1.5rem;
+    gap: 2rem;
+    padding: 1.75rem;
+    border-radius: 10px;
   }
   
   .app {
-    padding: 1.5rem;
+    padding: 1.75rem;
   }
 }
 
-/* Mobile layout - vertical stacking */
+/* Mobile layout - vertical stacking with enhanced spacing */
 @media (max-width: 768px) {
   .app-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding: 1rem;
+    gap: 2.5rem;
+    padding: 1.5rem;
     min-height: auto;
+    border-radius: 8px;
   }
   
   .app {
-    padding: 1rem;
+    padding: 1.5rem;
     min-height: 100vh;
   }
 }
 
-/* Small mobile devices */
+/* Small mobile devices - Compact but usable */
 @media (max-width: 480px) {
   .app-container {
-    gap: 1.5rem;
-    padding: 0.75rem;
+    gap: 2rem;
+    padding: 1rem;
+    border-radius: 6px;
   }
   
   .app {
-    padding: 0.75rem;
+    padding: 1rem;
   }
 }
