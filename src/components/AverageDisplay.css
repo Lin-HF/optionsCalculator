@@ -1,0 +1,42 @@
+.average-display {
+  /* Black text as specified in requirements 5.2 */
+  color: #000000;
+  font-family: inherit;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  /* Consistent styling with input components */
+  padding: 4px 0;
+  min-width: 80px;
+}
+
+.average-label {
+  /* Label styling */
+  font-weight: 500;
+  color: #000000;
+}
+
+.average-value {
+  /* Value styling - emphasize the calculated result */
+  font-weight: 600;
+  color: #000000;
+  min-width: 40px;
+  text-align: left;
+  
+  /* Ensure consistent number display */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .average-display {
+    font-size: 13px;
+    min-width: 70px;
+  }
+  
+  .average-value {
+    min-width: 35px;
+  }
+}
