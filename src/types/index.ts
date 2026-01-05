@@ -79,6 +79,7 @@ export interface PriceInputProps {
   value: number;
   onChange: (value: number) => void;
   placeholder?: string;
+  color?: 'red' | 'green';
 }
 
 export interface AverageDisplayProps {

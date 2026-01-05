@@ -28,6 +28,7 @@ export interface InputPosition {
   id: string;
   x: number; // Horizontal position (pixels from left)
   y: number; // Vertical position (pixels from top)
+  color: 'red' | 'green'; // Color coding for the input
 }
 
 export interface OutputPosition {
@@ -49,18 +50,18 @@ export interface ColumnLayout {
 export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 0,
   inputs: [
-    { id: 'A1', x: 25, y: 25 },
-    { id: 'A2', x: 25, y: 85 }, // Shared between A3 and C2 calculations
-    { id: 'C1', x: 25, y: 145 },
-    { id: 'E1', x: 25, y: 225 }, // Shared between E3 and F2 calculations
-    { id: 'E2', x: 25, y: 285 },
-    { id: 'F1', x: 25, y: 345 },
+    { id: 'A1', x: 25, y: 25, color: 'green' },
+    { id: 'A2', x: 25, y: 85, color: 'green' }, // Shared between A3 and C2 calculations
+    { id: 'C1', x: 200, y: 145, color: 'red' }, // Moved to right as requested
+    { id: 'E1', x: 25, y: 225, color: 'red' }, // Shared between E3 and F2 calculations
+    { id: 'E2', x: 25, y: 285, color: 'red' },
+    { id: 'F1', x: 200, y: 345, color: 'green' }, // Moved to right as requested
   ],
   outputs: [
     { id: 'A3', x: 200, y: 55, inputs: ['A1', 'A2'], position: 'right' },
-    { id: 'C2', x: 140, y: 115, inputs: ['A2', 'C1'], position: 'left' },
+    { id: 'C2', x: 25, y: 115, inputs: ['A2', 'C1'], position: 'left' }, // Moved to left as requested
     { id: 'E3', x: 200, y: 255, inputs: ['E1', 'E2'], position: 'right' },
-    { id: 'F2', x: 140, y: 285, inputs: ['E1', 'F1'], position: 'left' },
+    { id: 'F2', x: 25, y: 315, inputs: ['E1', 'F1'], position: 'left' }, // Moved to left as requested
   ]
 };
 
@@ -68,17 +69,17 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
 export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 1,
   inputs: [
-    { id: 'B1', x: 25, y: 25 },
-    { id: 'B2', x: 25, y: 85 }, // Shared between B3 and D2 calculations
-    { id: 'D1', x: 25, y: 145 },
-    { id: 'G1', x: 25, y: 225 },
-    { id: 'H1', x: 25, y: 285 }, // Shared between H3 and G2 calculations
-    { id: 'H2', x: 25, y: 345 },
+    { id: 'B1', x: 25, y: 25, color: 'green' },
+    { id: 'B2', x: 25, y: 85, color: 'green' }, // Shared between B3 and D2 calculations
+    { id: 'D1', x: 25, y: 145, color: 'red' }, // Moved to left as requested
+    { id: 'G1', x: 25, y: 225, color: 'green' }, // Moved to left as requested
+    { id: 'H1', x: 25, y: 285, color: 'red' }, // Shared between H3 and G2 calculations
+    { id: 'H2', x: 25, y: 345, color: 'red' },
   ],
   outputs: [
     { id: 'B3', x: 200, y: 55, inputs: ['B1', 'B2'], position: 'right' },
-    { id: 'D2', x: 140, y: 115, inputs: ['B2', 'D1'], position: 'left' },
-    { id: 'G2', x: 140, y: 255, inputs: ['G1', 'H1'], position: 'left' },
+    { id: 'D2', x: 200, y: 115, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
+    { id: 'G2', x: 200, y: 255, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
     { id: 'H3', x: 200, y: 315, inputs: ['H1', 'H2'], position: 'right' },
   ]
 };
@@ -87,10 +88,10 @@ export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
 export const RIGHT_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 2,
   inputs: [
-    { id: 'I1', x: 25, y: 25 },
-    { id: 'I2', x: 25, y: 85 },
-    { id: 'J1', x: 25, y: 165 },
-    { id: 'J2', x: 25, y: 225 },
+    { id: 'I1', x: 25, y: 25, color: 'green' },
+    { id: 'I2', x: 25, y: 85, color: 'green' },
+    { id: 'J1', x: 25, y: 165, color: 'red' },
+    { id: 'J2', x: 25, y: 225, color: 'red' },
   ],
   outputs: [
     { id: 'I3', x: 200, y: 55, inputs: ['I1', 'I2'], position: 'right' },

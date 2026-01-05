@@ -1,79 +1,157 @@
-.price-input {
-  /* Enhanced red border as specified in requirements 5.1 and 7.1 */
-  border: 2px solid #dc3545;
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 14px;
-  font-family: inherit;
+/* Price input container with dollar sign */
+.price-input-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 84px;
+}
+
+/* Currency symbol styling */
+.currency-symbol {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
   font-weight: 500;
-  width: 85px;
-  text-align: center;
+  color: #333;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Base price input styling */
+.price-input {
+  width: 100%;
+  height: 40px;
+  padding: 8px 12px 8px 20px; /* Left padding for $ symbol */
+  border: 2px solid;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: right;
   background-color: #ffffff;
-  
-  /* Remove default input styling */
+  transition: all 0.2s ease-in-out;
   outline: none;
   box-sizing: border-box;
-  
-  /* Enhanced transition for smooth interactions */
-  transition: all 0.2s ease-in-out;
-  
-  /* Ensure text is clearly visible */
+}
+
+/* Red variant (default) */
+.price-input--red {
+  border-color: #dc3545;
   color: #333;
 }
 
-.price-input:focus {
-  /* More prominent red border on focus for better UX */
+.price-input--red:focus {
   border-color: #c82333;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
-  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
 }
 
-.price-input:hover {
-  /* Subtle hover effect with enhanced border */
+.price-input--red:hover {
   border-color: #c82333;
   box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.1);
 }
 
-.price-input::placeholder {
+.price-input--red::placeholder {
   color: #999;
-  opacity: 0.8;
-  font-weight: 400;
 }
 
-/* Ensure consistent styling across browsers */
+/* Green variant */
+.price-input--green {
+  border-color: #28a745;
+  color: #333;
+}
+
+.price-input--green:focus {
+  border-color: #218838;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
+}
+
+.price-input--green:hover {
+  border-color: #218838;
+  box-shadow: 0 0 0 1px rgba(40, 167, 69, 0.1);
+}
+
+.price-input--green::placeholder {
+  color: #999;
+}
+
+/* Error state styling */
+.price-input:invalid {
+  border-color: #dc3545;
+}
+
+/* Disabled state */
+.price-input:disabled {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.price-input:disabled + .currency-symbol {
+  color: #6c757d;
+}
+
+/* Remove default input styling */
 .price-input::-webkit-outer-spin-button,
 .price-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
 .price-input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
-/* Tablet responsive design - Maintain enhanced styling */
+/* Tablet responsive design */
 @media (max-width: 1024px) and (min-width: 769px) {
-  .price-input {
+  .price-input-container {
     width: 80px;
-    padding: 9px 12px;
+  }
+  
+  .price-input {
+    padding: 7px 10px 7px 18px;
+    font-size: 13px;
+  }
+  
+  .currency-symbol {
+    left: 7px;
     font-size: 13px;
   }
 }
 
-/* Mobile responsive design - Maintain clarity */
+/* Mobile responsive design */
 @media (max-width: 768px) {
-  .price-input {
+  .price-input-container {
     width: 75px;
-    padding: 8px 10px;
+  }
+  
+  .price-input {
+    padding: 6px 8px 6px 16px;
+    font-size: 13px;
+  }
+  
+  .currency-symbol {
+    left: 6px;
     font-size: 13px;
   }
 }
 
-/* Small mobile devices - Compact but usable */
+/* Small mobile devices */
 @media (max-width: 480px) {
-  .price-input {
+  .price-input-container {
     width: 70px;
-    padding: 7px 8px;
+  }
+  
+  .price-input {
+    padding: 5px 6px 5px 14px;
+    font-size: 12px;
+  }
+  
+  .currency-symbol {
+    left: 5px;
     font-size: 12px;
   }
 }

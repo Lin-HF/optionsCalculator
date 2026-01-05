@@ -10,8 +10,32 @@ describe('PriceInput Component', () => {
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
     expect(input).toHaveClass('price-input');
+    expect(input).toHaveClass('price-input--red'); // Default color
     expect(input).toHaveAttribute('id', 'test-input');
     expect(input).toHaveAttribute('inputMode', 'decimal');
+  });
+
+  it('renders dollar sign', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={0} onChange={mockOnChange} />);
+    
+    expect(screen.getByText('$')).toBeInTheDocument();
+  });
+
+  it('applies correct color class for red variant', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={0} onChange={mockOnChange} color="red" />);
+    
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveClass('price-input--red');
+  });
+
+  it('applies correct color class for green variant', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={0} onChange={mockOnChange} color="green" />);
+    
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveClass('price-input--green');
   });
 
   it('displays empty string when value is 0', () => {

@@ -6,7 +6,8 @@ const PriceInput: React.FC<PriceInputProps> = ({
   id, 
   value, 
   onChange, 
-  placeholder = "0" 
+  placeholder = "0",
+  color = "red" // Default to red as per original requirements
 }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -43,17 +44,20 @@ const PriceInput: React.FC<PriceInputProps> = ({
   };
 
   return (
-    <input
-      type="text"
-      id={id}
-      className="price-input"
-      value={value === 0 ? '' : value.toString()}
-      onChange={handleInputChange}
-      onBlur={handleInputBlur}
-      placeholder={placeholder}
-      inputMode="decimal"
-      autoComplete="off"
-    />
+    <div className="price-input-container">
+      <span className="currency-symbol">$</span>
+      <input
+        type="text"
+        id={id}
+        className={`price-input price-input--${color}`}
+        value={value === 0 ? '' : value.toString()}
+        onChange={handleInputChange}
+        onBlur={handleInputBlur}
+        placeholder={placeholder}
+        inputMode="decimal"
+        autoComplete="off"
+      />
+    </div>
   );
 };
 

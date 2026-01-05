@@ -11,8 +11,8 @@ vi.mock('./DateHeader', () => ({
 }));
 
 vi.mock('./PriceInput', () => ({
-  default: ({ id, value, onChange }: { id: string; value: number; onChange: (value: number) => void }) => (
-    <input data-testid={`price-input-${id}`} value={value} onChange={(e) => onChange(Number(e.target.value))} />
+  default: ({ id, value, onChange, color }: { id: string; value: number; onChange: (value: number) => void; color?: string }) => (
+    <input data-testid={`price-input-${id}`} data-color={color} value={value} onChange={(e) => onChange(Number(e.target.value))} />
   )
 }));
 

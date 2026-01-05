@@ -63,6 +63,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
               value={getInputValue(input.id)}
               onChange={(value) => onValueChange(input.id, value)}
               placeholder="0"
+              color={input.color}
             />
           </div>
         ))}
