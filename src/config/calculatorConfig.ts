@@ -1,7 +1,7 @@
-// Calculator layout configuration
-// This file defines the complete calculator layout data for all three columns
+// Calculator layout configuration - REDESIGNED for shared inputs
+// This file defines the complete calculator layout with shared input positioning
 
-import { CalculatorGroupConfig, CalculationConfig } from '../types';
+import { CalculationConfig } from '../types';
 
 // Central calculation configuration object
 // Maps output IDs to their input dependencies and display positions
@@ -23,108 +23,86 @@ export const CALCULATIONS: CalculationConfig = {
   J3: { inputs: ['J1', 'J2'], position: 'right' },
 };
 
-// Calculator group configurations for each column
-// These define the structure and relationships between inputs and outputs
+// Input positioning configuration - each input appears only once
+export interface InputPosition {
+  id: string;
+  x: number; // Horizontal position (pixels from left)
+  y: number; // Vertical position (pixels from top)
+}
 
-// Left column configuration (本周五 - This Friday)
-export const LEFT_COLUMN_GROUPS: CalculatorGroupConfig[] = [
-  {
-    input1Id: 'A1',
-    input2Id: 'A2',
-    outputs: [
-      { id: 'A3', position: 'right', inputs: ['A1', 'A2'] }
-    ]
-  },
-  {
-    input1Id: 'A2',
-    input2Id: 'C1',
-    outputs: [
-      { id: 'C2', position: 'left', inputs: ['A2', 'C1'] }
-    ]
-  },
-  {
-    input1Id: 'E1',
-    input2Id: 'E2',
-    outputs: [
-      { id: 'E3', position: 'right', inputs: ['E1', 'E2'] }
-    ]
-  },
-  {
-    input1Id: 'E1',
-    input2Id: 'F1',
-    outputs: [
-      { id: 'F2', position: 'left', inputs: ['E1', 'F1'] }
-    ]
-  }
-];
+export interface OutputPosition {
+  id: string;
+  x: number; // Horizontal position (pixels from left)
+  y: number; // Vertical position (pixels from top)
+  inputs: string[]; // Input IDs this output depends on
+  position: 'left' | 'right'; // For legacy compatibility
+}
 
-// Middle column configuration (下周五 - Next Friday)
-export const MIDDLE_COLUMN_GROUPS: CalculatorGroupConfig[] = [
-  {
-    input1Id: 'B1',
-    input2Id: 'B2',
-    outputs: [
-      { id: 'B3', position: 'right', inputs: ['B1', 'B2'] }
-    ]
-  },
-  {
-    input1Id: 'B2',
-    input2Id: 'D1',
-    outputs: [
-      { id: 'D2', position: 'left', inputs: ['B2', 'D1'] }
-    ]
-  },
-  {
-    input1Id: 'H1',
-    input2Id: 'H2',
-    outputs: [
-      { id: 'H3', position: 'right', inputs: ['H1', 'H2'] }
-    ]
-  },
-  {
-    input1Id: 'G1',
-    input2Id: 'H1',
-    outputs: [
-      { id: 'G2', position: 'left', inputs: ['G1', 'H1'] }
-    ]
-  }
-];
+// Column layout configuration with absolute positioning
+export interface ColumnLayout {
+  weekOffset: number;
+  inputs: InputPosition[];
+  outputs: OutputPosition[];
+}
 
-// Right column configuration (下下周五 - Week After Next Friday)
-export const RIGHT_COLUMN_GROUPS: CalculatorGroupConfig[] = [
-  {
-    input1Id: 'I1',
-    input2Id: 'I2',
-    outputs: [
-      { id: 'I3', position: 'right', inputs: ['I1', 'I2'] }
-    ]
-  },
-  {
-    input1Id: 'J1',
-    input2Id: 'J2',
-    outputs: [
-      { id: 'J3', position: 'right', inputs: ['J1', 'J2'] }
-    ]
-  }
-];
+// Left column layout (本周五 - This Friday)
+export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
+  weekOffset: 0,
+  inputs: [
+    { id: 'A1', x: 25, y: 25 },
+    { id: 'A2', x: 25, y: 85 }, // Shared between A3 and C2 calculations
+    { id: 'C1', x: 25, y: 145 },
+    { id: 'E1', x: 25, y: 225 }, // Shared between E3 and F2 calculations
+    { id: 'E2', x: 25, y: 285 },
+    { id: 'F1', x: 25, y: 345 },
+  ],
+  outputs: [
+    { id: 'A3', x: 200, y: 55, inputs: ['A1', 'A2'], position: 'right' },
+    { id: 'C2', x: 140, y: 115, inputs: ['A2', 'C1'], position: 'left' },
+    { id: 'E3', x: 200, y: 255, inputs: ['E1', 'E2'], position: 'right' },
+    { id: 'F2', x: 140, y: 285, inputs: ['E1', 'F1'], position: 'left' },
+  ]
+};
+
+// Middle column layout (下周五 - Next Friday)
+export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
+  weekOffset: 1,
+  inputs: [
+    { id: 'B1', x: 25, y: 25 },
+    { id: 'B2', x: 25, y: 85 }, // Shared between B3 and D2 calculations
+    { id: 'D1', x: 25, y: 145 },
+    { id: 'G1', x: 25, y: 225 },
+    { id: 'H1', x: 25, y: 285 }, // Shared between H3 and G2 calculations
+    { id: 'H2', x: 25, y: 345 },
+  ],
+  outputs: [
+    { id: 'B3', x: 200, y: 55, inputs: ['B1', 'B2'], position: 'right' },
+    { id: 'D2', x: 140, y: 115, inputs: ['B2', 'D1'], position: 'left' },
+    { id: 'G2', x: 140, y: 255, inputs: ['G1', 'H1'], position: 'left' },
+    { id: 'H3', x: 200, y: 315, inputs: ['H1', 'H2'], position: 'right' },
+  ]
+};
+
+// Right column layout (下下周五 - Week After Next Friday)
+export const RIGHT_COLUMN_LAYOUT: ColumnLayout = {
+  weekOffset: 2,
+  inputs: [
+    { id: 'I1', x: 25, y: 25 },
+    { id: 'I2', x: 25, y: 85 },
+    { id: 'J1', x: 25, y: 165 },
+    { id: 'J2', x: 25, y: 225 },
+  ],
+  outputs: [
+    { id: 'I3', x: 200, y: 55, inputs: ['I1', 'I2'], position: 'right' },
+    { id: 'J3', x: 200, y: 195, inputs: ['J1', 'J2'], position: 'right' },
+  ]
+};
 
 // Complete column configuration array for easy iteration
-export const COLUMN_CONFIGURATIONS = [
-  {
-    weekOffset: 0,
-    groups: LEFT_COLUMN_GROUPS,
-    title: '本周五'
-  },
-  {
-    weekOffset: 1,
-    groups: MIDDLE_COLUMN_GROUPS,
-    title: '下周五'
-  },
-  {
-    weekOffset: 2,
-    groups: RIGHT_COLUMN_GROUPS,
-    title: '下下周五'
-  }
+export const COLUMN_LAYOUTS = [
+  LEFT_COLUMN_LAYOUT,
+  MIDDLE_COLUMN_LAYOUT,
+  RIGHT_COLUMN_LAYOUT
 ];
 
 // Helper function to get all input IDs used in the calculator
@@ -143,20 +121,32 @@ export const getCalculationByOutputId = (outputId: string) => {
   return CALCULATIONS[outputId];
 };
 
+// Helper function to get layout by column index
+export const getLayoutByColumnIndex = (columnIndex: number): ColumnLayout => {
+  if (columnIndex < 0 || columnIndex >= COLUMN_LAYOUTS.length) {
+    console.warn(`Invalid column index: ${columnIndex}. Returning empty layout.`);
+    return {
+      weekOffset: 0,
+      inputs: [],
+      outputs: []
+    };
+  }
+  return COLUMN_LAYOUTS[columnIndex];
+};
+
 // Helper function to validate configuration consistency
 export const validateConfiguration = (): boolean => {
   const allInputIds = getAllInputIds();
   const configuredInputIds = new Set<string>();
   
-  // Collect all input IDs from column configurations
-  [LEFT_COLUMN_GROUPS, MIDDLE_COLUMN_GROUPS, RIGHT_COLUMN_GROUPS].forEach(groups => {
-    groups.forEach(group => {
-      configuredInputIds.add(group.input1Id);
-      configuredInputIds.add(group.input2Id);
+  // Collect all input IDs from column layouts
+  COLUMN_LAYOUTS.forEach(layout => {
+    layout.inputs.forEach(input => {
+      configuredInputIds.add(input.id);
     });
   });
   
-  // Check if all calculation inputs are covered by column configurations
+  // Check if all calculation inputs are covered by column layouts
   const missingInputs = allInputIds.filter(id => !configuredInputIds.has(id));
   
   if (missingInputs.length > 0) {
@@ -166,3 +156,37 @@ export const validateConfiguration = (): boolean => {
   
   return true;
 };
+
+// Legacy compatibility - convert new layout to old group format for gradual migration
+export interface CalculatorGroupConfig {
+  input1Id: string;
+  input2Id: string;
+  outputs: Array<{
+    id: string;
+    position: 'left' | 'right';
+    inputs: string[];
+  }>;
+}
+
+// These are kept for backward compatibility but should be phased out
+export const LEFT_COLUMN_GROUPS: CalculatorGroupConfig[] = [];
+export const MIDDLE_COLUMN_GROUPS: CalculatorGroupConfig[] = [];
+export const RIGHT_COLUMN_GROUPS: CalculatorGroupConfig[] = [];
+
+export const COLUMN_CONFIGURATIONS = [
+  {
+    weekOffset: 0,
+    groups: LEFT_COLUMN_GROUPS,
+    title: '本周五'
+  },
+  {
+    weekOffset: 1,
+    groups: MIDDLE_COLUMN_GROUPS,
+    title: '下周五'
+  },
+  {
+    weekOffset: 2,
+    groups: RIGHT_COLUMN_GROUPS,
+    title: '下下周五'
+  }
+];

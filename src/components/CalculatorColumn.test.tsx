@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import CalculatorColumn from './CalculatorColumn';
-import { CalculatorGroupConfig } from '../types';
 
 // Mock the child components
 vi.mock('./DateHeader', () => ({
@@ -11,27 +10,25 @@ vi.mock('./DateHeader', () => ({
   )
 }));
 
-vi.mock('./CalculatorGroup', () => ({
-  default: ({ input1Id, input2Id }: { input1Id: string; input2Id: string }) => (
-    <div data-testid="calculator-group">{input1Id}-{input2Id}</div>
+vi.mock('./PriceInput', () => ({
+  default: ({ id, value, onChange }: { id: string; value: number; onChange: (value: number) => void }) => (
+    <input data-testid={`price-input-${id}`} value={value} onChange={(e) => onChange(Number(e.target.value))} />
+  )
+}));
+
+vi.mock('./AverageDisplay', () => ({
+  default: ({ value, label }: { value: number; label: string }) => (
+    <div data-testid={`average-display-${label}`}>{value}</div>
   )
 }));
 
 describe('CalculatorColumn', () => {
   const mockOnValueChange = vi.fn();
-  
-  const mockCalculatorGroups: CalculatorGroupConfig[] = [
-    {
-      input1Id: 'A1',
-      input2Id: 'A2',
-      outputs: [{ id: 'A3', position: 'right', inputs: ['A1', 'A2'] }]
-    },
-    {
-      input1Id: 'E1',
-      input2Id: 'E2',
-      outputs: [{ id: 'E3', position: 'right', inputs: ['E1', 'E2'] }]
-    }
-  ];
+  const mockInputValues = {
+    A1: 10, A2: 20, C1: 30, E1: 40, E2: 50, F1: 60,
+    B1: 70, B2: 80, D1: 90, G1: 100, H1: 110, H2: 120,
+    I1: 130, I2: 140, J1: 150, J2: 160
+  };
 
   beforeEach(() => {
     mockOnValueChange.mockClear();
@@ -41,7 +38,8 @@ describe('CalculatorColumn', () => {
     render(
       <CalculatorColumn
         weekOffset={1}
-        calculatorGroups={mockCalculatorGroups}
+        columnIndex={0}
+        inputValues={mockInputValues}
         onValueChange={mockOnValueChange}
       />
     );
@@ -49,64 +47,88 @@ describe('CalculatorColumn', () => {
     expect(screen.getByTestId('date-header')).toHaveTextContent('DateHeader-1');
   });
 
-  it('renders all calculator groups', () => {
+  it('renders inputs and outputs for left column', () => {
     render(
       <CalculatorColumn
         weekOffset={0}
-        calculatorGroups={mockCalculatorGroups}
+        columnIndex={0}
+        inputValues={mockInputValues}
         onValueChange={mockOnValueChange}
       />
     );
 
-    const calculatorGroups = screen.getAllByTestId('calculator-group');
-    expect(calculatorGroups).toHaveLength(2);
-    expect(calculatorGroups[0]).toHaveTextContent('A1-A2');
-    expect(calculatorGroups[1]).toHaveTextContent('E1-E2');
+    // Check that inputs are rendered
+    expect(screen.getByTestId('price-input-A1')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-A2')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-C1')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-E1')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-E2')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-F1')).toBeInTheDocument();
+
+    // Check that outputs are rendered
+    expect(screen.getByTestId('average-display-A3')).toBeInTheDocument();
+    expect(screen.getByTestId('average-display-C2')).toBeInTheDocument();
+    expect(screen.getByTestId('average-display-E3')).toBeInTheDocument();
+    expect(screen.getByTestId('average-display-F2')).toBeInTheDocument();
   });
 
-  it('renders with empty calculator groups', () => {
+  it('renders inputs and outputs for middle column', () => {
     render(
       <CalculatorColumn
-        weekOffset={2}
-        calculatorGroups={[]}
+        weekOffset={1}
+        columnIndex={1}
+        inputValues={mockInputValues}
         onValueChange={mockOnValueChange}
       />
     );
 
-    expect(screen.getByTestId('date-header')).toHaveTextContent('DateHeader-2');
-    expect(screen.queryByTestId('calculator-group')).not.toBeInTheDocument();
+    // Check that inputs are rendered
+    expect(screen.getByTestId('price-input-B1')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-B2')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-D1')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-G1')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-H1')).toBeInTheDocument();
+    expect(screen.getByTestId('price-input-H2')).toBeInTheDocument();
+
+    // Check that outputs are rendered
+    expect(screen.getByTestId('average-display-B3')).toBeInTheDocument();
+    expect(screen.getByTestId('average-display-D2')).toBeInTheDocument();
+    expect(screen.getByTestId('average-display-G2')).toBeInTheDocument();
+    expect(screen.getByTestId('average-display-H3')).toBeInTheDocument();
   });
 
   it('applies correct CSS classes', () => {
     const { container } = render(
       <CalculatorColumn
         weekOffset={0}
-        calculatorGroups={mockCalculatorGroups}
+        columnIndex={0}
+        inputValues={mockInputValues}
         onValueChange={mockOnValueChange}
       />
     );
 
     const columnElement = container.querySelector('.calculator-column');
-    const groupsElement = container.querySelector('.calculator-groups');
+    const areaElement = container.querySelector('.calculator-area');
     
     expect(columnElement).toBeInTheDocument();
-    expect(groupsElement).toBeInTheDocument();
+    expect(areaElement).toBeInTheDocument();
   });
 
-  it('passes inputValues to calculator groups', () => {
-    const inputValues = { A1: 10, A2: 20 };
-    
+  it('handles invalid column index gracefully', () => {
     render(
       <CalculatorColumn
         weekOffset={0}
-        calculatorGroups={mockCalculatorGroups}
-        inputValues={inputValues}
+        columnIndex={999}
+        inputValues={mockInputValues}
         onValueChange={mockOnValueChange}
       />
     );
 
-    // The component should render without errors when inputValues are provided
+    // Should still render DateHeader
     expect(screen.getByTestId('date-header')).toBeInTheDocument();
-    expect(screen.getAllByTestId('calculator-group')).toHaveLength(2);
+    
+    // Should not crash and should render empty calculator area
+    const areaElement = document.querySelector('.calculator-area');
+    expect(areaElement).toBeInTheDocument();
   });
 });

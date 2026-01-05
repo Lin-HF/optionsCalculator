@@ -56,7 +56,9 @@ export interface DateHeaderProps {
 
 export interface CalculatorColumnProps {
   weekOffset: number;
-  calculatorGroups: CalculatorGroupConfig[];
+  columnIndex: number;
+  inputValues: Record<string, number>;
+  onValueChange: (id: string, value: number) => void;
 }
 
 export interface CalculatorGroupConfig {

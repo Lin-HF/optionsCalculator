@@ -3,9 +3,6 @@ import './App.css';
 import { CalculatorColumn } from './components';
 import { InputValues } from './types';
 import { 
-  LEFT_COLUMN_GROUPS, 
-  MIDDLE_COLUMN_GROUPS, 
-  RIGHT_COLUMN_GROUPS,
   validateConfiguration
 } from './config/calculatorConfig';
 
@@ -53,7 +50,7 @@ function App() {
         {/* Left column - 本周五 */}
         <CalculatorColumn
           weekOffset={0}
-          calculatorGroups={LEFT_COLUMN_GROUPS}
+          columnIndex={0}
           inputValues={inputValues}
           onValueChange={handleValueChange}
         />
@@ -61,7 +58,7 @@ function App() {
         {/* Middle column - 下周五 */}
         <CalculatorColumn
           weekOffset={1}
-          calculatorGroups={MIDDLE_COLUMN_GROUPS}
+          columnIndex={1}
           inputValues={inputValues}
           onValueChange={handleValueChange}
         />
@@ -69,7 +66,7 @@ function App() {
         {/* Right column - 下下周五 */}
         <CalculatorColumn
           weekOffset={2}
-          calculatorGroups={RIGHT_COLUMN_GROUPS}
+          columnIndex={2}
           inputValues={inputValues}
           onValueChange={handleValueChange}
         />
