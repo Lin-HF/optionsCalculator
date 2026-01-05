@@ -5,19 +5,19 @@ import PriceInput from './PriceInput';
 import AverageDisplay from './AverageDisplay';
 import './CalculatorGroup.css';
 
-const CalculatorGroup: React.FC<CalculatorGroupProps> = ({
+interface CalculatorGroupPropsWithValues extends CalculatorGroupProps {
+  inputValues?: Record<string, number>;
+}
+
+const CalculatorGroup: React.FC<CalculatorGroupPropsWithValues> = ({
   input1Id,
   input2Id,
   outputs,
-  onValueChange
+  onValueChange,
+  inputValues = {}
 }) => {
-  // Get current values from a global state context or props
-  // For now, we'll assume values are passed through a context or parent component
-  // This will be properly connected when the App component is implemented
-  const getInputValue = (_id: string): number => {
-    // This is a placeholder - will be replaced with actual state management
-    // when the App component is implemented in task 5.1
-    return 0;
+  const getInputValue = (id: string): number => {
+    return inputValues[id] || 0;
   };
 
   const handleInputChange = (id: string, value: number) => {
