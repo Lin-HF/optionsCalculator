@@ -59,9 +59,9 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
   ],
   outputs: [
     { id: 'A3', x: 200, y: 55, inputs: ['A1', 'A2'], position: 'right' },
-    { id: 'C2', x: 25, y: 115, inputs: ['A2', 'C1'], position: 'left' }, // Moved to left as requested
+    { id: 'C2', x: 25, y: 175, inputs: ['A2', 'C1'], position: 'left' }, // Moved down to avoid overlap with A2
     { id: 'E3', x: 200, y: 255, inputs: ['E1', 'E2'], position: 'right' },
-    { id: 'F2', x: 25, y: 315, inputs: ['E1', 'F1'], position: 'left' }, // Moved to left as requested
+    { id: 'F2', x: 25, y: 375, inputs: ['E1', 'F1'], position: 'left' }, // Moved down to avoid overlap with E2
   ]
 };
 

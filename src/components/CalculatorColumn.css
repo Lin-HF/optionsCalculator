@@ -13,7 +13,7 @@
 
 .calculator-area {
   position: relative;
-  min-height: 450px; /* Enough height for all positioned elements */
+  min-height: 500px; /* Increased height for better spacing */
   flex: 1;
   background-color: #ffffff;
   border-radius: 8px;
@@ -70,7 +70,7 @@
   }
   
   .calculator-area {
-    min-height: 400px;
+    min-height: 450px;
     padding: 0.75rem;
   }
   
@@ -95,7 +95,7 @@
   }
   
   .calculator-area {
-    min-height: 350px;
+    min-height: 400px;
     padding: 0.5rem;
   }
   
@@ -123,7 +123,7 @@
   }
   
   .calculator-area {
-    min-height: 300px;
+    min-height: 350px;
     padding: 0.25rem;
   }
   
