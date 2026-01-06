@@ -64,7 +64,7 @@ const CalculatorGroup: React.FC<CalculatorGroupPropsWithValues> = ({
       {/* Middle column - Arrow */}
       <div className="arrow-column">
         <div className="arrow-container">
-          <svg width="60" height="40" viewBox="0 0 60 40" className="arrow-svg">
+          <svg width="60" height="80" viewBox="0 0 60 80" className="arrow-svg">
             <defs>
               <marker
                 id="arrowhead-group"
@@ -82,27 +82,30 @@ const CalculatorGroup: React.FC<CalculatorGroupPropsWithValues> = ({
             </defs>
             
             {/* Two input lines converging to one output line */}
+            {/* Line from center-right of first input (A1) */}
             <line
-              x1="5"
-              y1="10"
-              x2="25"
-              y2="20"
-              stroke="#666"
-              strokeWidth="2"
-            />
-            <line
-              x1="5"
-              y1="30"
-              x2="25"
-              y2="20"
-              stroke="#666"
-              strokeWidth="2"
-            />
-            <line
-              x1="25"
+              x1="0"
               y1="20"
-              x2="50"
-              y2="20"
+              x2="30"
+              y2="40"
+              stroke="#666"
+              strokeWidth="2"
+            />
+            {/* Line from center-right of second input (A2) */}
+            <line
+              x1="0"
+              y1="60"
+              x2="30"
+              y2="40"
+              stroke="#666"
+              strokeWidth="2"
+            />
+            {/* Line to center-left of output (A3) */}
+            <line
+              x1="30"
+              y1="40"
+              x2="55"
+              y2="40"
               stroke="#666"
               strokeWidth="2"
               markerEnd="url(#arrowhead-group)"
