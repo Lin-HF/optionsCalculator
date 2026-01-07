@@ -84,5 +84,4 @@ export interface PriceInputProps {
 
 export interface AverageDisplayProps {
   value: number;
-  label: string;
 }

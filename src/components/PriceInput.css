@@ -14,9 +14,18 @@
   transform: translateY(-50%);
   font-size: 0.875rem;
   font-weight: 500;
-  color: #333;
+  color: #333; /* Default color */
   z-index: 1;
   pointer-events: none;
+}
+
+/* Currency symbol color variants */
+.currency-symbol--red {
+  color: #dc3545; /* Red currency symbol for red inputs */
+}
+
+.currency-symbol--green {
+  color: #28a745; /* Green currency symbol for green inputs */
 }
 
 /* Base price input styling */
@@ -38,7 +47,7 @@
 /* Red variant (default) */
 .price-input--red {
   border-color: #dc3545;
-  color: #333;
+  color: #dc3545; /* Red text to match red border */
 }
 
 .price-input--red:focus {
@@ -58,7 +67,7 @@
 /* Green variant */
 .price-input--green {
   border-color: #28a745;
-  color: #333;
+  color: #28a745; /* Green text to match green border */
 }
 
 .price-input--green:focus {

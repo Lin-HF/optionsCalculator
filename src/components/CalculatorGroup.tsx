@@ -123,9 +123,9 @@ const CalculatorGroup: React.FC<CalculatorGroupPropsWithValues> = ({
               key={output.id}
               className="output-container"
             >
+              <label className="output-label">{output.id}</label>
               <AverageDisplay
                 value={outputValue}
-                label={output.id}
               />
             </div>
           );

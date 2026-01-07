@@ -382,9 +382,11 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
                 top: `${output.y}px`,
               }}
             >
+              <label className="input-label" htmlFor={output.id}>
+                {output.id}
+              </label>
               <AverageDisplay
                 value={outputValue}
-                label={output.id}
               />
             </div>
           );

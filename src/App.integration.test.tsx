@@ -18,8 +18,9 @@ describe('App Integration Tests', () => {
       
       // Check that A3 displays the correct average
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
+        const a3Label = screen.getByText('A3');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const a3Value = a3Container?.querySelector('.average-value');
         expect(a3Value).toHaveTextContent('15'); // (10 + 20) / 2 = 15
       });
     });
@@ -37,8 +38,9 @@ describe('App Integration Tests', () => {
       
       // Check that C2 displays the correct average
       await waitFor(() => {
-        const c2Display = screen.getByText(/C2:/);
-        const c2Value = c2Display.parentElement?.querySelector('.average-value');
+        const c2Label = screen.getByText('C2');
+        const c2Container = c2Label.parentElement?.querySelector('.average-display-container');
+        const c2Value = c2Container?.querySelector('.average-value');
         expect(c2Value).toHaveTextContent('40'); // (30 + 50) / 2 = 40
       });
     });
@@ -58,10 +60,12 @@ describe('App Integration Tests', () => {
       
       // Check both calculations update correctly
       await waitFor(() => {
-        const e3Display = screen.getByText(/E3:/);
-        const f2Display = screen.getByText(/F2:/);
-        const e3Value = e3Display.parentElement?.querySelector('.average-value');
-        const f2Value = f2Display.parentElement?.querySelector('.average-value');
+        const e3Label = screen.getByText('E3');
+        const f2Label = screen.getByText('F2');
+        const e3Container = e3Label.parentElement?.querySelector('.average-display-container');
+        const f2Container = f2Label.parentElement?.querySelector('.average-display-container');
+        const e3Value = e3Container?.querySelector('.average-value');
+        const f2Value = f2Container?.querySelector('.average-value');
         
         expect(e3Value).toHaveTextContent('150'); // (100 + 200) / 2 = 150
         expect(f2Value).toHaveTextContent('200'); // (100 + 300) / 2 = 200
@@ -81,8 +85,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(a2Input, { target: { value: '20' } });
       
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
+        const a3Label = screen.getByText('A3');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const a3Value = a3Container?.querySelector('.average-value');
         expect(a3Value).toHaveTextContent('15');
       });
       
@@ -90,8 +95,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(a1Input, { target: { value: '30' } });
       
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
+        const a3Label = screen.getByText('A3');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const a3Value = a3Container?.querySelector('.average-value');
         expect(a3Value).toHaveTextContent('25'); // (30 + 20) / 2 = 25
       });
     });
@@ -107,8 +113,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(b2Input, { target: { value: '60' } });
       
       await waitFor(() => {
-        const b3Display = screen.getByText(/B3:/);
-        const b3Value = b3Display.parentElement?.querySelector('.average-value');
+        const b3Label = screen.getByText('B3');
+        const b3Container = b3Label.parentElement?.querySelector('.average-display-container');
+        const b3Value = b3Container?.querySelector('.average-value');
         expect(b3Value).toHaveTextContent('50');
       });
       
@@ -116,8 +123,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(b2Input, { target: { value: '80' } });
       
       await waitFor(() => {
-        const b3Display = screen.getByText(/B3:/);
-        const b3Value = b3Display.parentElement?.querySelector('.average-value');
+        const b3Label = screen.getByText('B3');
+        const b3Container = b3Label.parentElement?.querySelector('.average-display-container');
+        const b3Value = b3Container?.querySelector('.average-value');
         expect(b3Value).toHaveTextContent('60'); // (40 + 80) / 2 = 60
       });
     });
@@ -133,8 +141,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(i2Input, { target: { value: '90' } });
       
       await waitFor(() => {
-        const i3Display = screen.getByText(/I3:/);
-        const i3Value = i3Display.parentElement?.querySelector('.average-value');
+        const i3Label = screen.getByText('I3');
+        const i3Container = i3Label.parentElement?.querySelector('.average-display-container');
+        const i3Value = i3Container?.querySelector('.average-value');
         expect(i3Value).toHaveTextContent('80');
       });
       
@@ -142,8 +151,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(i1Input, { target: { value: '110' } });
       
       await waitFor(() => {
-        const i3Display = screen.getByText(/I3:/);
-        const i3Value = i3Display.parentElement?.querySelector('.average-value');
+        const i3Label = screen.getByText('I3');
+        const i3Container = i3Label.parentElement?.querySelector('.average-display-container');
+        const i3Value = i3Container?.querySelector('.average-value');
         expect(i3Value).toHaveTextContent('100'); // (110 + 90) / 2 = 100
       });
     });
@@ -169,13 +179,17 @@ describe('App Integration Tests', () => {
       
       // Verify all calculations are correct
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const b3Display = screen.getByText(/B3:/);
-        const i3Display = screen.getByText(/I3:/);
+        const a3Label = screen.getByText('A3');
+        const b3Label = screen.getByText('B3');
+        const i3Label = screen.getByText('I3');
         
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
-        const b3Value = b3Display.parentElement?.querySelector('.average-value');
-        const i3Value = i3Display.parentElement?.querySelector('.average-value');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const b3Container = b3Label.parentElement?.querySelector('.average-display-container');
+        const i3Container = i3Label.parentElement?.querySelector('.average-display-container');
+        
+        const a3Value = a3Container?.querySelector('.average-value');
+        const b3Value = b3Container?.querySelector('.average-value');
+        const i3Value = i3Container?.querySelector('.average-value');
         
         expect(a3Value).toHaveTextContent('15'); // (10+20)/2
         expect(b3Value).toHaveTextContent('35'); // (30+40)/2
@@ -194,8 +208,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(a2Input, { target: { value: '' } }); // Empty should be treated as 0
       
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
+        const a3Label = screen.getByText('A3');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const a3Value = a3Container?.querySelector('.average-value');
         expect(a3Value).toHaveTextContent('10'); // (20 + 0) / 2 = 10
       });
     });
@@ -211,8 +226,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(a2Input, { target: { value: '20.3' } });
       
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
+        const a3Label = screen.getByText('A3');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const a3Value = a3Container?.querySelector('.average-value');
         expect(a3Value).toHaveTextContent('15.4'); // (10.5 + 20.3) / 2 = 15.4
       });
     });
@@ -228,8 +244,9 @@ describe('App Integration Tests', () => {
       fireEvent.change(a2Input, { target: { value: '30' } });
       
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
+        const a3Label = screen.getByText('A3');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const a3Value = a3Container?.querySelector('.average-value');
         expect(a3Value).toHaveTextContent('10'); // (-10 + 30) / 2 = 10
       });
     });
@@ -273,9 +290,10 @@ describe('App Integration Tests', () => {
       // Verify all calculations
       for (const testCase of testCases) {
         await waitFor(() => {
-          const outputDisplay = screen.getByText(new RegExp(`${testCase.output}:`));
-          const outputValue = outputDisplay.parentElement?.querySelector('.average-value');
-          expect(outputValue).toHaveTextContent(testCase.expected.toString());
+          const outputLabel = screen.getByText(testCase.output);
+          const outputContainer = outputLabel.parentElement?.querySelector('.average-display-container');
+          const outputValue = outputContainer?.querySelector('.average-value');
+          expect(outputValue).toHaveTextContent(`${testCase.expected}`);
         });
       }
     });
@@ -296,10 +314,12 @@ describe('App Integration Tests', () => {
       
       // Verify initial calculations
       await waitFor(() => {
-        const e3Display = screen.getByText(/E3:/);
-        const f2Display = screen.getByText(/F2:/);
-        const e3Value = e3Display.parentElement?.querySelector('.average-value');
-        const f2Value = f2Display.parentElement?.querySelector('.average-value');
+        const e3Label = screen.getByText('E3');
+        const f2Label = screen.getByText('F2');
+        const e3Container = e3Label.parentElement?.querySelector('.average-display-container');
+        const f2Container = f2Label.parentElement?.querySelector('.average-display-container');
+        const e3Value = e3Container?.querySelector('.average-value');
+        const f2Value = f2Container?.querySelector('.average-value');
         
         expect(e3Value).toHaveTextContent('150'); // (100+200)/2
         expect(f2Value).toHaveTextContent('200'); // (100+300)/2
@@ -309,10 +329,12 @@ describe('App Integration Tests', () => {
       fireEvent.change(e1Input, { target: { value: '400' } });
       
       await waitFor(() => {
-        const e3Display = screen.getByText(/E3:/);
-        const f2Display = screen.getByText(/F2:/);
-        const e3Value = e3Display.parentElement?.querySelector('.average-value');
-        const f2Value = f2Display.parentElement?.querySelector('.average-value');
+        const e3Label = screen.getByText('E3');
+        const f2Label = screen.getByText('F2');
+        const e3Container = e3Label.parentElement?.querySelector('.average-display-container');
+        const f2Container = f2Label.parentElement?.querySelector('.average-display-container');
+        const e3Value = e3Container?.querySelector('.average-value');
+        const f2Value = f2Container?.querySelector('.average-value');
         
         expect(e3Value).toHaveTextContent('300'); // (400+200)/2
         expect(f2Value).toHaveTextContent('350'); // (400+300)/2
@@ -335,8 +357,9 @@ describe('App Integration Tests', () => {
       
       // Final state should be correct
       await waitFor(() => {
-        const a3Display = screen.getByText(/A3:/);
-        const a3Value = a3Display.parentElement?.querySelector('.average-value');
+        const a3Label = screen.getByText('A3');
+        const a3Container = a3Label.parentElement?.querySelector('.average-display-container');
+        const a3Value = a3Container?.querySelector('.average-value');
         expect(a3Value).toHaveTextContent('75'); // (50 + 100) / 2 = 75
       });
     });

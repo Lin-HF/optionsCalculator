@@ -17,8 +17,10 @@ vi.mock('./PriceInput', () => ({
 }));
 
 vi.mock('./AverageDisplay', () => ({
-  default: ({ value, label }: { value: number; label: string }) => (
-    <div data-testid={`average-display-${label}`}>{value}</div>
+  default: ({ value }: { value: number }) => (
+    <div data-testid={`average-display`} className="average-display-container">
+      <div className="average-value">${value}</div>
+    </div>
   )
 }));
 
@@ -66,10 +68,10 @@ describe('CalculatorColumn', () => {
     expect(screen.getByTestId('price-input-F1')).toBeInTheDocument();
 
     // Check that outputs are rendered
-    expect(screen.getByTestId('average-display-A3')).toBeInTheDocument();
-    expect(screen.getByTestId('average-display-C2')).toBeInTheDocument();
-    expect(screen.getByTestId('average-display-E3')).toBeInTheDocument();
-    expect(screen.getByTestId('average-display-F2')).toBeInTheDocument();
+    expect(screen.getByText('A3')).toBeInTheDocument();
+    expect(screen.getByText('C2')).toBeInTheDocument();
+    expect(screen.getByText('E3')).toBeInTheDocument();
+    expect(screen.getByText('F2')).toBeInTheDocument();
   });
 
   it('renders inputs and outputs for middle column', () => {
@@ -91,10 +93,10 @@ describe('CalculatorColumn', () => {
     expect(screen.getByTestId('price-input-H2')).toBeInTheDocument();
 
     // Check that outputs are rendered
-    expect(screen.getByTestId('average-display-B3')).toBeInTheDocument();
-    expect(screen.getByTestId('average-display-D2')).toBeInTheDocument();
-    expect(screen.getByTestId('average-display-G2')).toBeInTheDocument();
-    expect(screen.getByTestId('average-display-H3')).toBeInTheDocument();
+    expect(screen.getByText('B3')).toBeInTheDocument();
+    expect(screen.getByText('D2')).toBeInTheDocument();
+    expect(screen.getByText('G2')).toBeInTheDocument();
+    expect(screen.getByText('H3')).toBeInTheDocument();
   });
 
   it('applies correct CSS classes', () => {

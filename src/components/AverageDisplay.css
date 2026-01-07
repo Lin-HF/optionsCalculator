@@ -1,94 +1,94 @@
-.average-display {
-  /* Enhanced black text as specified in requirements 5.2 */
-  color: #000000;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
+/* Average display container with dollar sign - matching PriceInput styling */
+.average-display-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 110px; /* Match PriceInput width */
+}
+
+/* Currency symbol styling - matching PriceInput */
+.currency-symbol {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem; /* Increased to match larger output text */
+  font-weight: 500;
+  color: #333; /* Neutral color for outputs */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Average value styling - similar to PriceInput but with bold text */
+.average-value {
+  width: 100%;
+  height: 40px;
+  padding: 8px 12px 8px 20px; /* Match PriceInput padding */
+  border: 2px solid #ccc; /* Neutral gray border for outputs */
+  border-radius: 6px;
+  font-size: 1rem; /* Increased from 0.875rem for larger text */
+  font-weight: 700; /* Keep bold for easy reading */
+  text-align: right;
+  background-color: #ffffff;
+  color: #000000; /* Enhanced black text */
+  outline: none;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 6px;
-  
-  /* Enhanced styling for better visibility */
-  padding: 6px 8px;
-  min-width: 85px;
-  background-color: #fafafa;
-  border-radius: 4px;
-  border: 1px solid #e8e8e8;
-}
-
-.average-label {
-  /* Enhanced label styling */
-  font-weight: 600;
-  color: #000000;
-  font-size: 13px;
-  letter-spacing: 0.3px;
-}
-
-.average-value {
-  /* Enhanced value styling - emphasize the calculated result */
-  font-weight: 700;
-  color: #000000;
-  min-width: 45px;
-  text-align: left;
-  font-size: 14px;
+  justify-content: flex-end;
   
   /* Ensure consistent number display */
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.2px;
 }
 
-/* Tablet responsive design - Maintain enhanced styling */
+/* Tablet responsive design */
 @media (max-width: 1024px) and (min-width: 769px) {
-  .average-display {
-    font-size: 13px;
-    min-width: 80px;
-    padding: 5px 7px;
-  }
-  
-  .average-label {
-    font-size: 12px;
+  .average-display-container {
+    width: 105px; /* Match PriceInput responsive width */
   }
   
   .average-value {
-    min-width: 42px;
-    font-size: 13px;
+    padding: 7px 10px 7px 18px;
+    font-size: 0.95rem; /* Slightly smaller but still larger than before */
+  }
+  
+  .currency-symbol {
+    left: 7px;
+    font-size: 0.95rem;
   }
 }
 
-/* Mobile responsive design - Maintain clarity */
+/* Mobile responsive design */
 @media (max-width: 768px) {
-  .average-display {
-    font-size: 13px;
-    min-width: 75px;
-    padding: 4px 6px;
-    gap: 5px;
-  }
-  
-  .average-label {
-    font-size: 12px;
+  .average-display-container {
+    width: 100px; /* Match PriceInput responsive width */
   }
   
   .average-value {
-    min-width: 38px;
-    font-size: 13px;
+    padding: 6px 8px 6px 16px;
+    font-size: 0.875rem; /* Larger than before but fits mobile */
+  }
+  
+  .currency-symbol {
+    left: 6px;
+    font-size: 0.875rem;
   }
 }
 
-/* Small mobile devices - Compact but readable */
+/* Small mobile devices */
 @media (max-width: 480px) {
-  .average-display {
-    font-size: 12px;
-    min-width: 70px;
-    gap: 4px;
-    padding: 3px 5px;
-  }
-  
-  .average-label {
-    font-size: 11px;
+  .average-display-container {
+    width: 95px; /* Match PriceInput responsive width */
   }
   
   .average-value {
-    min-width: 35px;
-    font-size: 12px;
+    padding: 5px 6px 5px 14px;
+    font-size: 0.8rem; /* Larger than before but fits small screens */
+  }
+  
+  .currency-symbol {
+    left: 5px;
+    font-size: 0.8rem;
   }
 }

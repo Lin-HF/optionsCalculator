@@ -67,7 +67,7 @@ const PriceInput: React.FC<PriceInputProps> = ({
 
   return (
     <div className="price-input-container">
-      <span className="currency-symbol">$</span>
+      <span className={`currency-symbol currency-symbol--${color}`}>$</span>
       <input
         type="text"
         id={id}

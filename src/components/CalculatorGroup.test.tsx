@@ -46,7 +46,7 @@ describe('CalculatorGroup', () => {
   it('renders output display with correct label', () => {
     render(<CalculatorGroup {...defaultProps} />);
     
-    expect(screen.getByText('A3:')).toBeInTheDocument();
+    expect(screen.getByText('A3')).toBeInTheDocument();
   });
 
   it('calls onValueChange when input values change', () => {
@@ -77,18 +77,18 @@ describe('CalculatorGroup', () => {
 
     render(<CalculatorGroup {...propsWithMultipleOutputs} />);
     
-    expect(screen.getByText('A3:')).toBeInTheDocument();
-    expect(screen.getByText('C2:')).toBeInTheDocument();
+    expect(screen.getByText('A3')).toBeInTheDocument();
+    expect(screen.getByText('C2')).toBeInTheDocument();
     
     // Check that outputs are rendered in the output column
-    const rightOutput = screen.getByText('A3:').closest('.output-container');
-    const leftOutput = screen.getByText('C2:').closest('.output-container');
+    const rightOutput = screen.getByText('A3').closest('.output-container');
+    const leftOutput = screen.getByText('C2').closest('.output-container');
     
     expect(rightOutput).toHaveClass('output-container');
     expect(leftOutput).toHaveClass('output-container');
     
     // Check that they are in the output column
-    const outputColumn = screen.getByText('A3:').closest('.output-column');
+    const outputColumn = screen.getByText('A3').closest('.output-column');
     expect(outputColumn).toBeInTheDocument();
   });
 

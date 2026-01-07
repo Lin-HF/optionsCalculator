@@ -17,21 +17,21 @@ describe('DateHeader', () => {
     render(<DateHeader weekOffset={0} />);
     
     // For Monday Jan 15, 2024, this Friday would be Jan 19, 2024
-    expect(screen.getByText('本周五：01.19')).toBeInTheDocument();
+    expect(screen.getByText('This Friday: 01.19')).toBeInTheDocument();
   });
 
   it('should render the next week Friday date with correct format', () => {
     render(<DateHeader weekOffset={1} />);
     
     // Next Friday would be Jan 26, 2024
-    expect(screen.getByText('下周五：01.26')).toBeInTheDocument();
+    expect(screen.getByText('Next Friday: 01.26')).toBeInTheDocument();
   });
 
   it('should render the week after next Friday date with correct format', () => {
     render(<DateHeader weekOffset={2} />);
     
     // Week after next Friday would be Feb 2, 2024
-    expect(screen.getByText('下下周五：02.02')).toBeInTheDocument();
+    expect(screen.getByText('Friday After Next: 02.02')).toBeInTheDocument();
   });
 
   it('should have proper CSS classes applied', () => {
@@ -44,12 +44,12 @@ describe('DateHeader', () => {
 
   it('should handle different weekOffset values correctly', () => {
     const { rerender } = render(<DateHeader weekOffset={0} />);
-    expect(screen.getByText(/本周五/)).toBeInTheDocument();
+    expect(screen.getByText(/This Friday/)).toBeInTheDocument();
 
     rerender(<DateHeader weekOffset={1} />);
-    expect(screen.getByText(/下周五/)).toBeInTheDocument();
+    expect(screen.getByText(/Next Friday/)).toBeInTheDocument();
 
     rerender(<DateHeader weekOffset={2} />);
-    expect(screen.getByText(/下下周五/)).toBeInTheDocument();
+    expect(screen.getByText(/Friday After Next/)).toBeInTheDocument();
   });
 });
