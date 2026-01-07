@@ -47,12 +47,12 @@ export function getFormattedFridayDate(weekOffset: number): string {
   
   switch (weekOffset) {
     case 0:
-      return `本周五：${formattedDate}`;
+      return `This Friday: ${formattedDate}`;
     case 1:
-      return `下周五：${formattedDate}`;
+      return `Next Friday: ${formattedDate}`;
     case 2:
-      return `下下周五：${formattedDate}`;
+      return `Friday After Next: ${formattedDate}`;
     default:
-      return `周五：${formattedDate}`;
+      return `Friday: ${formattedDate}`;
   }
 }

@@ -110,9 +110,9 @@ describe('Date Utils', () => {
       const nextWeek = getFormattedFridayDate(1);
       const weekAfter = getFormattedFridayDate(2);
       
-      expect(thisWeek).toMatch(/^本周五：\d{2}\.\d{2}$/);
-      expect(nextWeek).toMatch(/^下周五：\d{2}\.\d{2}$/);
-      expect(weekAfter).toMatch(/^下下周五：\d{2}\.\d{2}$/);
+      expect(thisWeek).toMatch(/^This Friday: \d{2}\.\d{2}$/);
+      expect(nextWeek).toMatch(/^Next Friday: \d{2}\.\d{2}$/);
+      expect(weekAfter).toMatch(/^Friday After Next: \d{2}\.\d{2}$/);
     });
   });
 });
