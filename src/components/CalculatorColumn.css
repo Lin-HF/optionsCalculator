@@ -4,20 +4,14 @@
   gap: 1.5rem;
   padding: 1.5rem;
   min-height: 100%;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  border: 1px solid #dee2e6;
-  /* Enhanced shadow for better definition */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  /* Removed background, border, and shadow for unified appearance */
 }
 
 .calculator-area {
   position: relative;
   min-height: 500px; /* Increased height for better spacing */
   flex: 1;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+  /* Removed background and border for seamless integration */
   padding: 1rem;
 }
 

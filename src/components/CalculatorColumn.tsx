@@ -33,8 +33,8 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
   };
 
   /**
-   * Generate connection lines for inputs to output (like A1, A2 -> A3)
-   * Creates a clean connection pattern with horizontal and vertical segments
+   * Generate connection lines for inputs to output
+   * Handles special cases for C2 and F2 with custom straight-line connections
    */
   const generateConnectionLines = (inputPositions: any[], output: any) => {
     if (inputPositions.length === 0) return [];
@@ -42,7 +42,112 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
     const lines: JSX.Element[] = [];
     const { inputWidth, inputHeight, strokeColor, strokeWidth, connectionOffset } = CONNECTION_CONFIG;
 
-    // Calculate connection points
+    // Special cases for C2 and F2 with custom connection patterns
+    const isSpecialCase = (outputId: string, inputIds: string[]) => {
+      // C2 has inputs A2 and C1 - needs special handling
+      if (outputId === 'C2' && inputIds.includes('A2') && inputIds.includes('C1')) {
+        return 'C2-special';
+      }
+      // F2 has inputs E1 and F1 - needs special handling  
+      if (outputId === 'F2' && inputIds.includes('E1') && inputIds.includes('F1')) {
+        return 'F2-special';
+      }
+      return null;
+    };
+
+    const specialCase = isSpecialCase(output.id, output.inputs);
+
+    if (specialCase === 'C2-special') {
+      // Find A2 and C1 input positions
+      const a2Input = inputPositions.find(pos => pos.id === 'A2');
+      const c1Input = inputPositions.find(pos => pos.id === 'C1');
+      
+      if (a2Input && c1Input) {
+        // Line 1: A2 bottom to C2 top (straight line) - shifted left
+        const a2BottomX = a2Input.x + inputWidth / 3 + 15; // Shifted left from center
+        const a2BottomY = a2Input.y + inputHeight - 20; // Bottom of A2
+        const c2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 3; // Shifted left from center
+        const c2TopY = output.y; // Top of C2
+
+        lines.push(
+          <line
+            key={`${output.id}-A2-line`}
+            x1={a2BottomX}
+            y1={a2BottomY}
+            x2={c2TopX}
+            y2={c2TopY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+
+        // Line 2: C2 right to C1 (straight line) - shifted left
+        const c2RightX = output.x + CONNECTION_CONFIG.outputWidth - 10; // Slightly left of right edge
+        const c2RightY = output.y + CONNECTION_CONFIG.outputHeight / 2; // Center of C2
+        const c1LeftX = c1Input.x + 5; // Slightly right of left edge
+        const c1LeftY = c1Input.y + inputHeight / 2; // Center of C1
+
+        lines.push(
+          <line
+            key={`${output.id}-C1-line`}
+            x1={c2RightX}
+            y1={c2RightY}
+            x2={c1LeftX}
+            y2={c1LeftY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+      }
+      return lines;
+    }
+
+    if (specialCase === 'F2-special') {
+      // Find E1 and F1 input positions
+      const e1Input = inputPositions.find(pos => pos.id === 'E1');
+      const f1Input = inputPositions.find(pos => pos.id === 'F1');
+      
+      if (e1Input && f1Input) {
+        // Line 1: E1 top to F2 bottom (straight line) - shifted left
+        const e1TopX = e1Input.x + inputWidth / 3 + 21; // Shifted left from center
+        const e1TopY = e1Input.y; // Top of E1
+        const f2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 10; // Shifted left from center
+        const f2BottomY = output.y + CONNECTION_CONFIG.outputHeight - 10; // Bottom of F2
+
+        lines.push(
+          <line
+            key={`${output.id}-E1-line`}
+            x1={e1TopX}
+            y1={e1TopY}
+            x2={f2BottomX}
+            y2={f2BottomY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+
+        // Line 2: F2 right to F1 (straight line) - shifted left
+        const f2RightX = output.x + CONNECTION_CONFIG.outputWidth - 15; // Slightly left of right edge
+        const f2RightY = output.y + CONNECTION_CONFIG.outputHeight / 2; // Center of F2
+        const f1LeftX = f1Input.x + 5; // Slightly right of left edge
+        const f1LeftY = f1Input.y + inputHeight / 2; // Center of F1
+
+        lines.push(
+          <line
+            key={`${output.id}-F1-line`}
+            x1={f2RightX}
+            y1={f2RightY}
+            x2={f1LeftX}
+            y2={f1LeftY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+      }
+      return lines;
+    }
+
+    // Default complex routing for other cases (A1,A2 -> A3, etc.)
     const outputLeftX = output.x;
     const outputCenterY = output.y + CONNECTION_CONFIG.outputHeight / 2;
     const connectionX = outputLeftX - connectionOffset; // Vertical line position

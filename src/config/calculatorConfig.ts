@@ -56,15 +56,15 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
   inputs: [
     { id: 'A1', x: 25, y: 25, color: 'green' },
     { id: 'A2', x: 25, y: 85, color: 'green' }, // Shared between A3 and C2 calculations
-    { id: 'C1', x: 250, y: 180, color: 'red' }, // Moved to right as requested
-    { id: 'F1', x: 250, y: 250, color: 'green' }, // Moved above E group
+    { id: 'C1', x: 250, y: 165, color: 'red' }, // Moved to right as requested
+    { id: 'F1', x: 250, y: 245, color: 'green' }, // Moved above E group
     { id: 'E1', x: 25, y: 365, color: 'red' }, // Shared between E3 and F2 calculations - moved down
     { id: 'E2', x: 25, y: 425, color: 'red' }, // Moved down
   ],
   outputs: [
     { id: 'A3', x: 200, y: 70, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
-    { id: 'C2', x: 25, y: 160, inputs: ['A2', 'C1'], position: 'left' }, // Moved down to avoid overlap with A2
-    { id: 'F2', x: 25, y: 320, inputs: ['E1', 'F1'], position: 'left' }, // Moved above E group
+    { id: 'C2', x: 25, y: 180, inputs: ['A2', 'C1'], position: 'left' }, // Moved down to avoid overlap with A2
+    { id: 'F2', x: 25, y: 260, inputs: ['E1', 'F1'], position: 'left' }, // Moved above E group
     { id: 'E3', x: 200, y: 410, inputs: ['E1', 'E2'], position: 'right' }, // Moved down
   ]
 };
@@ -73,18 +73,18 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
 export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 1,
   inputs: [
-    { id: 'B1', x: 25, y: 25, color: 'green' },
-    { id: 'B2', x: 25, y: 85, color: 'green' }, // Shared between B3 and D2 calculations
-    { id: 'D1', x: 25, y: 145, color: 'red' }, // Moved to left as requested
-    { id: 'G1', x: 25, y: 225, color: 'green' }, // Moved to left as requested
-    { id: 'H1', x: 25, y: 285, color: 'red' }, // Shared between H3 and G2 calculations
-    { id: 'H2', x: 25, y: 345, color: 'red' },
+    { id: 'B1', x: 75, y: 25, color: 'green' },
+    { id: 'B2', x: 75, y: 85, color: 'green' }, // Shared between B3 and D2 calculations
+    { id: 'D1', x: -80, y: 165, color: 'red' }, // Moved to left as requested
+    { id: 'G1', x: -80, y: 245, color: 'green' }, // Moved to left as requested
+    { id: 'H1', x: 75, y: 365, color: 'red' }, // Shared between H3 and G2 calculations
+    { id: 'H2', x: 75, y: 425, color: 'red' },
   ],
   outputs: [
-    { id: 'B3', x: 200, y: 70, inputs: ['B1', 'B2'], position: 'right' },
-    { id: 'D2', x: 200, y: 130, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
-    { id: 'G2', x: 200, y: 270, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
-    { id: 'H3', x: 200, y: 330, inputs: ['H1', 'H2'], position: 'right' },
+    { id: 'B3', x: 250, y: 70, inputs: ['B1', 'B2'], position: 'right' },
+    { id: 'D2', x: 250, y: 140, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
+    { id: 'G2', x: 250, y: 320, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
+    { id: 'H3', x: 250, y: 410, inputs: ['H1', 'H2'], position: 'right' },
   ]
 };
 
