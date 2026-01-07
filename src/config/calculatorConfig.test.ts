@@ -43,11 +43,11 @@ describe('Calculator Configuration', () => {
       
       // Check input positions
       const inputIds = LEFT_COLUMN_LAYOUT.inputs.map(input => input.id);
-      expect(inputIds).toEqual(['A1', 'A2', 'C1', 'E1', 'E2', 'F1']);
+      expect(inputIds).toEqual(['A1', 'A2', 'C1', 'F1', 'E1', 'E2']);
       
       // Check output configurations
       const outputIds = LEFT_COLUMN_LAYOUT.outputs.map(output => output.id);
-      expect(outputIds).toEqual(['A3', 'C2', 'E3', 'F2']);
+      expect(outputIds).toEqual(['A3', 'C2', 'F2', 'E3']);
     });
 
     it('should have correct middle column layout', () => {

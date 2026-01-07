@@ -29,7 +29,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
     outputHeight: 50, // Adjust based on your AverageDisplay height
     strokeColor: '#666',
     strokeWidth: 2,
-    connectionOffset: 10, // Distance for the connecting segment
+    connectionOffset: 40, // Reduced from 10 to make horizontal lines shorter
   };
 
   /**

@@ -11,11 +11,10 @@ After completing any task from the implementation plan:
 1. **Verify Implementation**: Ensure all code changes are working correctly
 2. **Run Tests**: Execute relevant tests to confirm functionality
 3. **Build Check**: Verify the project builds successfully
-4. **Commit Changes**: Always commit the completed work with a descriptive message
 
-## Commit Message Format
+## Commit Message Format (For Reference)
 
-Use conventional commit format when committing task completion:
+When ready to commit, use conventional commit format:
 
 ```
 feat(task-X.Y): implement [component/feature name]

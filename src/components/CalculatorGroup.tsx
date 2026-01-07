@@ -84,7 +84,7 @@ const CalculatorGroup: React.FC<CalculatorGroupPropsWithValues> = ({
             {/* Two input lines converging to one output line */}
             {/* Line from center-right of first input (A1) */}
             <line
-              x1="0"
+              x1="10"
               y1="20"
               x2="30"
               y2="40"

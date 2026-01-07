@@ -28,7 +28,7 @@ export type InputValues = {
 // Output configuration for calculations
 export interface OutputConfig {
   id: string;
-  position: 'left' | 'right';
+  position: 'left' | 'right' | 'top' | 'bottom';
   inputs: string[]; // Input IDs that participate in calculation
 }
 
@@ -36,7 +36,7 @@ export interface OutputConfig {
 export type CalculationConfig = {
   [key: string]: {
     inputs: string[];
-    position: 'left' | 'right';
+    position: 'left' | 'right' | 'top' | 'bottom';
   };
 };
 

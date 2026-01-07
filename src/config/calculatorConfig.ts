@@ -36,7 +36,11 @@ export interface OutputPosition {
   x: number; // Horizontal position (pixels from left)
   y: number; // Vertical position (pixels from top)
   inputs: string[]; // Input IDs this output depends on
-  position: 'left' | 'right'; // For legacy compatibility
+  position: 'left' | 'right' | 'top' | 'bottom'; // Position relative to inputs
+  // 'left': Output positioned to the left of inputs
+  // 'right': Output positioned to the right of inputs  
+  // 'top': Output positioned above inputs
+  // 'bottom': Output positioned below inputs
 }
 
 // Column layout configuration with absolute positioning
@@ -52,16 +56,16 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
   inputs: [
     { id: 'A1', x: 25, y: 25, color: 'green' },
     { id: 'A2', x: 25, y: 85, color: 'green' }, // Shared between A3 and C2 calculations
-    { id: 'C1', x: 200, y: 145, color: 'red' }, // Moved to right as requested
-    { id: 'E1', x: 25, y: 225, color: 'red' }, // Shared between E3 and F2 calculations
-    { id: 'E2', x: 25, y: 285, color: 'red' },
-    { id: 'F1', x: 200, y: 345, color: 'green' }, // Moved to right as requested
+    { id: 'C1', x: 250, y: 180, color: 'red' }, // Moved to right as requested
+    { id: 'F1', x: 250, y: 250, color: 'green' }, // Moved above E group
+    { id: 'E1', x: 25, y: 365, color: 'red' }, // Shared between E3 and F2 calculations - moved down
+    { id: 'E2', x: 25, y: 425, color: 'red' }, // Moved down
   ],
   outputs: [
-    { id: 'A3', x: 200, y: 55, inputs: ['A1', 'A2'], position: 'right' },
-    { id: 'C2', x: 25, y: 175, inputs: ['A2', 'C1'], position: 'left' }, // Moved down to avoid overlap with A2
-    { id: 'E3', x: 200, y: 255, inputs: ['E1', 'E2'], position: 'right' },
-    { id: 'F2', x: 25, y: 375, inputs: ['E1', 'F1'], position: 'left' }, // Moved down to avoid overlap with E2
+    { id: 'A3', x: 200, y: 70, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
+    { id: 'C2', x: 25, y: 160, inputs: ['A2', 'C1'], position: 'left' }, // Moved down to avoid overlap with A2
+    { id: 'F2', x: 25, y: 320, inputs: ['E1', 'F1'], position: 'left' }, // Moved above E group
+    { id: 'E3', x: 200, y: 410, inputs: ['E1', 'E2'], position: 'right' }, // Moved down
   ]
 };
 
@@ -77,10 +81,10 @@ export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
     { id: 'H2', x: 25, y: 345, color: 'red' },
   ],
   outputs: [
-    { id: 'B3', x: 200, y: 55, inputs: ['B1', 'B2'], position: 'right' },
-    { id: 'D2', x: 200, y: 115, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
-    { id: 'G2', x: 200, y: 255, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
-    { id: 'H3', x: 200, y: 315, inputs: ['H1', 'H2'], position: 'right' },
+    { id: 'B3', x: 200, y: 70, inputs: ['B1', 'B2'], position: 'right' },
+    { id: 'D2', x: 200, y: 130, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
+    { id: 'G2', x: 200, y: 270, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
+    { id: 'H3', x: 200, y: 330, inputs: ['H1', 'H2'], position: 'right' },
   ]
 };
 
@@ -94,8 +98,8 @@ export const RIGHT_COLUMN_LAYOUT: ColumnLayout = {
     { id: 'J2', x: 25, y: 225, color: 'red' },
   ],
   outputs: [
-    { id: 'I3', x: 200, y: 55, inputs: ['I1', 'I2'], position: 'right' },
-    { id: 'J3', x: 200, y: 195, inputs: ['J1', 'J2'], position: 'right' },
+    { id: 'I3', x: 200, y: 70, inputs: ['I1', 'I2'], position: 'right' },
+    { id: 'J3', x: 200, y: 210, inputs: ['J1', 'J2'], position: 'right' },
   ]
 };
 
@@ -164,7 +168,7 @@ export interface CalculatorGroupConfig {
   input2Id: string;
   outputs: Array<{
     id: string;
-    position: 'left' | 'right';
+    position: 'left' | 'right' | 'top' | 'bottom';
     inputs: string[];
   }>;
 }
