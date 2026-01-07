@@ -7,8 +7,7 @@ const PriceInput: React.FC<PriceInputProps> = ({
   value, 
   onChange, 
   placeholder = "0",
-  color = "red", // Default to red as per original requirements
-  label // Optional label like "PUT" or "CALL"
+  color = "red" // Default to red as per original requirements
 }) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -81,11 +80,6 @@ const PriceInput: React.FC<PriceInputProps> = ({
         inputMode="decimal"
         autoComplete="off"
       />
-      {label && (
-        <span className={`option-label option-label--${label.toLowerCase()}`}>
-          {label}
-        </span>
-      )}
     </div>
   );
 };

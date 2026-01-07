@@ -28,10 +28,30 @@
 .input-label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #555;
+  color: #007bff; /* Changed to blue */
   text-align: center;
   margin-bottom: 2px;
   letter-spacing: 0.5px;
+}
+
+/* External option labels (PUT/CALL) positioned outside inputs */
+.external-option-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* PUT label (red) */
+.external-option-label--put {
+  color: #dc3545;
+}
+
+/* CALL label (green) */
+.external-option-label--call {
+  color: #28a745;
 }
 
 /* Output containers - positioned absolutely */
@@ -107,6 +127,10 @@
   .input-label {
     font-size: 0.7rem;
   }
+  
+  .external-option-label {
+    font-size: 0.7rem;
+  }
 }
 
 /* Small mobile devices */
@@ -133,6 +157,10 @@
   }
   
   .input-label {
+    font-size: 0.65rem;
+  }
+  
+  .external-option-label {
     font-size: 0.65rem;
   }
 }

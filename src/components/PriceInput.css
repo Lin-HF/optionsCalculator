@@ -3,7 +3,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 110px; /* Increased from 84px to accommodate 5 digits + labels */
+  width: 110px; /* Keep wider for 5-digit support */
 }
 
 /* Currency symbol styling */
@@ -19,34 +19,11 @@
   pointer-events: none;
 }
 
-/* Option label styling (PUT/CALL) */
-.option-label {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.75rem;
-  font-weight: 600;
-  z-index: 1;
-  pointer-events: none;
-  text-transform: uppercase;
-}
-
-/* PUT label (red) */
-.option-label--put {
-  color: #dc3545;
-}
-
-/* CALL label (green) */
-.option-label--call {
-  color: #28a745;
-}
-
 /* Base price input styling */
 .price-input {
   width: 100%;
   height: 40px;
-  padding: 8px 40px 8px 20px; /* Right padding increased for PUT/CALL label */
+  padding: 8px 12px 8px 20px; /* Reverted right padding */
   border: 2px solid;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -135,18 +112,13 @@
   }
   
   .price-input {
-    padding: 7px 35px 7px 18px; /* Adjusted right padding for label */
+    padding: 7px 10px 7px 18px; /* Reverted right padding */
     font-size: 13px;
   }
   
   .currency-symbol {
     left: 7px;
     font-size: 13px;
-  }
-  
-  .option-label {
-    right: 6px;
-    font-size: 0.7rem;
   }
 }
 
@@ -157,18 +129,13 @@
   }
   
   .price-input {
-    padding: 6px 32px 6px 16px; /* Adjusted right padding for label */
+    padding: 6px 8px 6px 16px; /* Reverted right padding */
     font-size: 13px;
   }
   
   .currency-symbol {
     left: 6px;
     font-size: 13px;
-  }
-  
-  .option-label {
-    right: 5px;
-    font-size: 0.65rem;
   }
 }
 
@@ -179,17 +146,12 @@
   }
   
   .price-input {
-    padding: 5px 28px 5px 14px; /* Adjusted right padding for label */
+    padding: 5px 6px 5px 14px; /* Reverted right padding */
     font-size: 12px;
   }
   
   .currency-symbol {
     left: 5px;
     font-size: 12px;
-  }
-  
-  .option-label {
-    right: 4px;
-    font-size: 0.6rem;
   }
 }

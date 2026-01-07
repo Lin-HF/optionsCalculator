@@ -352,8 +352,20 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
               onChange={(value) => onValueChange(input.id, value)}
               placeholder="0"
               color={input.color}
-              label={input.label}
             />
+            {input.label && (
+              <span 
+                className={`external-option-label external-option-label--${input.label.toLowerCase()}`}
+                style={{
+                  position: 'absolute',
+                  left: (input.id === 'C1' || input.id === 'F1') ? '-30px' : '115px', // Left for C1/F1, right for D1/G1
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                }}
+              >
+                {input.label}
+              </span>
+            )}
           </div>
         ))}
 

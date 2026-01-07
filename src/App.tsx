@@ -43,8 +43,24 @@ function App() {
     }));
   };
 
+  // Format current date for display
+  const getCurrentDate = (): string => {
+    const now = new Date();
+    return now.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   return (
     <div className="app">
+      {/* Current date display in top left corner */}
+      <div className="current-date">
+        {getCurrentDate()}
+      </div>
+      
       {/* Three-column layout structure */}
       <div className="app-container">
         {/* Left column - 本周五 */}
