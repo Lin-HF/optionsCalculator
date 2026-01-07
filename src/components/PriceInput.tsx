@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PriceInputProps } from '../types';
 import './PriceInput.css';
 
@@ -7,19 +7,35 @@ const PriceInput: React.FC<PriceInputProps> = ({
   value, 
   onChange, 
   placeholder = "0",
-  color = "red" // Default to red as per original requirements
+  color = "red", // Default to red as per original requirements
+  label // Optional label like "PUT" or "CALL"
 }) => {
+  const [inputValue, setInputValue] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  // Update input value when prop value changes (from external source)
+  useEffect(() => {
+    if (!isFocused) {
+      if (value === 0) {
+        setInputValue('');
+      } else {
+        setInputValue(value.toFixed(2));
+      }
+    }
+  }, [value, isFocused]);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+    const newInputValue = event.target.value;
+    setInputValue(newInputValue);
     
     // Handle empty input - treat as 0 (requirement 7.1)
-    if (inputValue === '' || inputValue === null || inputValue === undefined) {
+    if (newInputValue === '' || newInputValue === null || newInputValue === undefined) {
       onChange(0);
       return;
     }
     
     // Parse the input value
-    const numericValue = parseFloat(inputValue);
+    const numericValue = parseFloat(newInputValue);
     
     // Handle invalid input - ignore non-numeric values (requirement 7.3)
     if (isNaN(numericValue)) {
@@ -31,15 +47,22 @@ const PriceInput: React.FC<PriceInputProps> = ({
     onChange(numericValue);
   };
 
+  const handleInputFocus = () => {
+    setIsFocused(true);
+  };
+
   const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    // Ensure the displayed value matches the actual numeric value
-    // This handles cases where user enters something like "5." or "5.00"
-    const inputValue = event.target.value;
-    if (inputValue !== '' && !isNaN(parseFloat(inputValue))) {
-      const numericValue = parseFloat(inputValue);
-      if (numericValue !== value) {
-        onChange(numericValue);
-      }
+    setIsFocused(false);
+    
+    // Format the value to 2 decimal places on blur
+    const inputVal = event.target.value;
+    if (inputVal !== '' && !isNaN(parseFloat(inputVal))) {
+      const numericValue = parseFloat(inputVal);
+      onChange(numericValue);
+      setInputValue(numericValue === 0 ? '' : numericValue.toFixed(2));
+    } else if (inputVal === '') {
+      onChange(0);
+      setInputValue('');
     }
   };
 
@@ -50,13 +73,19 @@ const PriceInput: React.FC<PriceInputProps> = ({
         type="text"
         id={id}
         className={`price-input price-input--${color}`}
-        value={value === 0 ? '' : value.toString()}
+        value={inputValue}
         onChange={handleInputChange}
+        onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         placeholder={placeholder}
         inputMode="decimal"
         autoComplete="off"
       />
+      {label && (
+        <span className={`option-label option-label--${label.toLowerCase()}`}>
+          {label}
+        </span>
+      )}
     </div>
   );
 };

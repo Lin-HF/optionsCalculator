@@ -80,6 +80,7 @@ export interface PriceInputProps {
   onChange: (value: number) => void;
   placeholder?: string;
   color?: 'red' | 'green';
+  label?: string; // Optional label like "PUT" or "CALL"
 }
 
 export interface AverageDisplayProps {

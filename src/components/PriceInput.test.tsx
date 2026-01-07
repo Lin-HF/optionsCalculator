@@ -51,7 +51,7 @@ describe('PriceInput Component', () => {
     render(<PriceInput id="test-input" value={25.5} onChange={mockOnChange} />);
     
     const input = screen.getByRole('textbox') as HTMLInputElement;
-    expect(input.value).toBe('25.5');
+    expect(input.value).toBe('25.50');
   });
 
   it('handles valid numeric input correctly', () => {

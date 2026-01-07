@@ -23,7 +23,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
 
   // Configuration for connection lines - easy to adjust
   const CONNECTION_CONFIG = {
-    inputWidth: 84,
+    inputWidth: 110, // Updated to match new input container width
     inputHeight: 80,
     outputWidth: 120, // Adjust based on your AverageDisplay width
     outputHeight: 50, // Adjust based on your AverageDisplay height
@@ -42,7 +42,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
     const lines: JSX.Element[] = [];
     const { inputWidth, inputHeight, strokeColor, strokeWidth, connectionOffset } = CONNECTION_CONFIG;
 
-    // Special cases for C2 and F2 with custom connection patterns
+    // Special cases for C2, F2, D2, and G2 with custom connection patterns
     const isSpecialCase = (outputId: string, inputIds: string[]) => {
       // C2 has inputs A2 and C1 - needs special handling
       if (outputId === 'C2' && inputIds.includes('A2') && inputIds.includes('C1')) {
@@ -51,6 +51,14 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
       // F2 has inputs E1 and F1 - needs special handling  
       if (outputId === 'F2' && inputIds.includes('E1') && inputIds.includes('F1')) {
         return 'F2-special';
+      }
+      // D2 has inputs B2 and D1 - needs special handling
+      if (outputId === 'D2' && inputIds.includes('B2') && inputIds.includes('D1')) {
+        return 'D2-special';
+      }
+      // G2 has inputs G1 and H1 - needs special handling
+      if (outputId === 'G2' && inputIds.includes('G1') && inputIds.includes('H1')) {
+        return 'G2-special';
       }
       return null;
     };
@@ -66,7 +74,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
         // Line 1: A2 bottom to C2 top (straight line) - shifted left
         const a2BottomX = a2Input.x + inputWidth / 3 + 15; // Shifted left from center
         const a2BottomY = a2Input.y + inputHeight - 20; // Bottom of A2
-        const c2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 3; // Shifted left from center
+        const c2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
         const c2TopY = output.y; // Top of C2
 
         lines.push(
@@ -109,9 +117,9 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
       
       if (e1Input && f1Input) {
         // Line 1: E1 top to F2 bottom (straight line) - shifted left
-        const e1TopX = e1Input.x + inputWidth / 3 + 21; // Shifted left from center
+        const e1TopX = e1Input.x + inputWidth / 3 + 16; // Shifted left from center
         const e1TopY = e1Input.y; // Top of E1
-        const f2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 10; // Shifted left from center
+        const f2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
         const f2BottomY = output.y + CONNECTION_CONFIG.outputHeight - 10; // Bottom of F2
 
         lines.push(
@@ -139,6 +147,96 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
             y1={f2RightY}
             x2={f1LeftX}
             y2={f1LeftY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+      }
+      return lines;
+    }
+
+    if (specialCase === 'D2-special') {
+      // Find B2 and D1 input positions
+      const b2Input = inputPositions.find(pos => pos.id === 'B2');
+      const d1Input = inputPositions.find(pos => pos.id === 'D1');
+      
+      if (b2Input && d1Input) {
+        // Line 1: B2 bottom to D2 top (straight line) - shifted left
+        const b2BottomX = b2Input.x + inputWidth / 3 + 15; // Shifted left from center
+        const b2BottomY = b2Input.y + inputHeight - 20; // Bottom of B2
+        const d2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
+        const d2TopY = output.y; // Top of D2
+
+        lines.push(
+          <line
+            key={`${output.id}-B2-line`}
+            x1={b2BottomX}
+            y1={b2BottomY}
+            x2={d2TopX}
+            y2={d2TopY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+
+        // Line 2: D2 left to D1 right (straight line) - shifted left
+        const d2LeftX = output.x + 5; // Slightly right of left edge
+        const d2LeftY = output.y + CONNECTION_CONFIG.outputHeight / 2; // Center of D2
+        const d1RightX = d1Input.x + inputWidth - 5; // Slightly left of right edge
+        const d1RightY = d1Input.y + inputHeight / 2; // Center of D1
+
+        lines.push(
+          <line
+            key={`${output.id}-D1-line`}
+            x1={d2LeftX}
+            y1={d2LeftY}
+            x2={d1RightX}
+            y2={d1RightY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+      }
+      return lines;
+    }
+
+    if (specialCase === 'G2-special') {
+      // Find G1 and H1 input positions
+      const g1Input = inputPositions.find(pos => pos.id === 'G1');
+      const h1Input = inputPositions.find(pos => pos.id === 'H1');
+      
+      if (g1Input && h1Input) {
+        // Line 1: G1 right to G2 left (straight line) - shifted left
+        const g1RightX = g1Input.x + inputWidth - 5; // Slightly left of right edge
+        const g1RightY = g1Input.y + inputHeight / 2; // Center of G1
+        const g2LeftX = output.x + 5; // Slightly right of left edge
+        const g2LeftY = output.y + CONNECTION_CONFIG.outputHeight / 2; // Center of G2
+
+        lines.push(
+          <line
+            key={`${output.id}-G1-line`}
+            x1={g1RightX}
+            y1={g1RightY}
+            x2={g2LeftX}
+            y2={g2LeftY}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+
+        // Line 2: G2 bottom to H1 top (straight line) - shifted left
+        const g2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
+        const g2BottomY = output.y + CONNECTION_CONFIG.outputHeight - 10; // Bottom of G2
+        const h1TopX = h1Input.x + inputWidth / 3 + 17; // Shifted left from center
+        const h1TopY = h1Input.y; // Top of H1
+
+        lines.push(
+          <line
+            key={`${output.id}-H1-line`}
+            x1={g2BottomX}
+            y1={g2BottomY}
+            x2={h1TopX}
+            y2={h1TopY}
             stroke={strokeColor}
             strokeWidth={strokeWidth}
           />
@@ -254,6 +352,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
               onChange={(value) => onValueChange(input.id, value)}
               placeholder="0"
               color={input.color}
+              label={input.label}
             />
           </div>
         ))}
