@@ -376,15 +376,13 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
             <div
               key={output.id}
               className="output-container"
+              data-testid={`output-${output.id}`}
               style={{
                 position: 'absolute',
                 left: `${output.x}px`,
                 top: `${output.y}px`,
               }}
             >
-              <label className="input-label" htmlFor={output.id}>
-                {output.id}
-              </label>
               <AverageDisplay
                 value={outputValue}
               />

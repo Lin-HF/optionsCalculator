@@ -67,11 +67,9 @@ describe('CalculatorColumn', () => {
     expect(screen.getByTestId('price-input-E2')).toBeInTheDocument();
     expect(screen.getByTestId('price-input-F1')).toBeInTheDocument();
 
-    // Check that outputs are rendered
-    expect(screen.getByText('A3')).toBeInTheDocument();
-    expect(screen.getByText('C2')).toBeInTheDocument();
-    expect(screen.getByText('E3')).toBeInTheDocument();
-    expect(screen.getByText('F2')).toBeInTheDocument();
+    // Check that outputs are rendered (by checking for average display components)
+    const averageDisplays = screen.getAllByTestId('average-display');
+    expect(averageDisplays).toHaveLength(4); // A3, C2, E3, F2
   });
 
   it('renders inputs and outputs for middle column', () => {
@@ -92,11 +90,9 @@ describe('CalculatorColumn', () => {
     expect(screen.getByTestId('price-input-H1')).toBeInTheDocument();
     expect(screen.getByTestId('price-input-H2')).toBeInTheDocument();
 
-    // Check that outputs are rendered
-    expect(screen.getByText('B3')).toBeInTheDocument();
-    expect(screen.getByText('D2')).toBeInTheDocument();
-    expect(screen.getByText('G2')).toBeInTheDocument();
-    expect(screen.getByText('H3')).toBeInTheDocument();
+    // Check that outputs are rendered (by checking for average display components)
+    const averageDisplays = screen.getAllByTestId('average-display');
+    expect(averageDisplays).toHaveLength(4); // B3, D2, G2, H3
   });
 
   it('applies correct CSS classes', () => {
