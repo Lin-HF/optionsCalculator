@@ -21,6 +21,91 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
 }) => {
   const layout = getLayoutByColumnIndex(columnIndex);
 
+  // Configuration for connection lines - easy to adjust
+  const CONNECTION_CONFIG = {
+    inputWidth: 84,
+    inputHeight: 80,
+    outputWidth: 120, // Adjust based on your AverageDisplay width
+    outputHeight: 50, // Adjust based on your AverageDisplay height
+    strokeColor: '#666',
+    strokeWidth: 2,
+    connectionOffset: 10, // Distance for the connecting segment
+  };
+
+  /**
+   * Generate connection lines for inputs to output (like A1, A2 -> A3)
+   * Creates a clean connection pattern with horizontal and vertical segments
+   */
+  const generateConnectionLines = (inputPositions: any[], output: any) => {
+    if (inputPositions.length === 0) return [];
+
+    const lines: JSX.Element[] = [];
+    const { inputWidth, inputHeight, strokeColor, strokeWidth, connectionOffset } = CONNECTION_CONFIG;
+
+    // Calculate connection points
+    const outputLeftX = output.x;
+    const outputCenterY = output.y + CONNECTION_CONFIG.outputHeight / 2;
+    const connectionX = outputLeftX - connectionOffset; // Vertical line position
+
+    inputPositions.forEach((inputPos, index) => {
+      if (!inputPos) return;
+
+      const inputRightX = inputPos.x + inputWidth;
+      const inputCenterY = inputPos.y + inputHeight / 2;
+      const lineKey = `${output.id}-${inputPos.id}`;
+
+      // Line 1: From input right edge to connection point
+      lines.push(
+        <line
+          key={`${lineKey}-horizontal`}
+          x1={inputRightX}
+          y1={inputCenterY}
+          x2={connectionX}
+          y2={inputCenterY}
+          stroke={strokeColor}
+          strokeWidth={strokeWidth}
+        />
+      );
+
+      // Line 2: Vertical segment (only draw once, connecting all inputs)
+      if (index === 0 && inputPositions.length > 1) {
+        const firstInputY = inputPositions[0].y + inputHeight / 2;
+        const lastInputY = inputPositions[inputPositions.length - 1].y + inputHeight / 2;
+        
+        lines.push(
+          <line
+            key={`${output.id}-vertical`}
+            x1={connectionX}
+            y1={Math.min(firstInputY, lastInputY)}
+            x2={connectionX}
+            y2={Math.max(firstInputY, lastInputY)}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+          />
+        );
+      }
+    });
+
+    // Line 3: From connection point to output
+    const midInputY = inputPositions.length > 1 
+      ? (inputPositions[0].y + inputPositions[inputPositions.length - 1].y + inputHeight) / 2
+      : inputPositions[0].y + inputHeight / 2;
+
+    lines.push(
+      <line
+        key={`${output.id}-to-output`}
+        x1={connectionX}
+        y1={midInputY}
+        x2={outputLeftX}
+        y2={outputCenterY}
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
+      />
+    );
+
+    return lines;
+  };
+
   const getInputValue = (id: string): number => {
     return inputValues[id] || 0;
   };
@@ -96,28 +181,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
               layout.inputs.find(input => input.id === inputId)
             ).filter(Boolean);
 
-            return inputPositions.map((inputPos) => {
-              if (!inputPos) return null;
-              
-              // Draw line from input to output
-              const inputCenterX = inputPos.x + 42; // Input width/2 + padding
-              const inputCenterY = inputPos.y + 20; // Input height/2
-              const outputCenterX = output.x + 42; // Output width/2
-              const outputCenterY = output.y + 15; // Output height/2
-
-              return (
-                <line
-                  key={`${output.id}-${inputPos.id}`}
-                  x1={inputCenterX}
-                  y1={inputCenterY}
-                  x2={outputCenterX}
-                  y2={outputCenterY}
-                  stroke="#ddd"
-                  strokeWidth="1"
-                  strokeDasharray="2,2"
-                />
-              );
-            });
+            return generateConnectionLines(inputPositions, output);
           })}
         </svg>
       </div>
