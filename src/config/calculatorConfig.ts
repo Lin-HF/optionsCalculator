@@ -63,10 +63,10 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
     { id: 'E2', x: 25, y: 425, color: 'red' }, // Moved down
   ],
   outputs: [
-    { id: 'A3', x: 200, y: 70, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
+    { id: 'A3', x: 300, y: 70, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
     { id: 'C2', x: 25, y: 190, inputs: ['A2', 'C1'], position: 'left' }, // Moved down to avoid overlap with A2
     { id: 'F2', x: 25, y: 270, inputs: ['E1', 'F1'], position: 'left' }, // Moved above E group
-    { id: 'E3', x: 200, y: 410, inputs: ['E1', 'E2'], position: 'right' }, // Moved down
+    { id: 'E3', x: 300, y: 410, inputs: ['E1', 'E2'], position: 'right' }, // Moved down
   ]
 };
 
@@ -95,12 +95,12 @@ export const RIGHT_COLUMN_LAYOUT: ColumnLayout = {
   inputs: [
     { id: 'I1', x: 25, y: 25, color: 'green' },
     { id: 'I2', x: 25, y: 85, color: 'green' },
-    { id: 'J1', x: 25, y: 165, color: 'red' },
-    { id: 'J2', x: 25, y: 225, color: 'red' },
+    { id: 'J1', x: 25, y: 365, color: 'red' },
+    { id: 'J2', x: 25, y: 425, color: 'red' },
   ],
   outputs: [
     { id: 'I3', x: 200, y: 70, inputs: ['I1', 'I2'], position: 'right' },
-    { id: 'J3', x: 200, y: 210, inputs: ['J1', 'J2'], position: 'right' },
+    { id: 'J3', x: 200, y: 410, inputs: ['J1', 'J2'], position: 'right' },
   ]
 };
 
