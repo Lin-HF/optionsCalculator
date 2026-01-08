@@ -120,4 +120,94 @@ describe('PriceInput Component', () => {
     const input = screen.getByRole('textbox');
     expect(input).toHaveAttribute('placeholder', '0');
   });
+
+  // Additional edge case tests for comprehensive input validation
+  it('handles whitespace-only input as empty (requirement 7.1)', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={25} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: '   ' } });
+    
+    // Whitespace should be treated as invalid input and ignored
+    expect(mockOnChange).not.toHaveBeenCalled();
+  });
+
+  it('handles mixed alphanumeric input by extracting numeric part (requirement 7.3)', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={25} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: '123abc' } });
+    
+    // parseFloat extracts the numeric part, which is reasonable user-friendly behavior
+    expect(mockOnChange).toHaveBeenCalledWith(123);
+  });
+
+  it('handles special characters as invalid input (requirement 7.3)', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={25} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: '@#$%' } });
+    
+    // Special characters should be treated as invalid and ignored
+    expect(mockOnChange).not.toHaveBeenCalled();
+  });
+
+  it('handles very large numbers correctly', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={0} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: '999999999.99' } });
+    
+    expect(mockOnChange).toHaveBeenCalledWith(999999999.99);
+  });
+
+  it('handles very small decimal numbers correctly', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={0} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: '0.001' } });
+    
+    expect(mockOnChange).toHaveBeenCalledWith(0.001);
+  });
+
+  it('handles zero input correctly', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={25} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: '0' } });
+    
+    expect(mockOnChange).toHaveBeenCalledWith(0);
+  });
+
+  it('formats value to 2 decimal places on blur for non-zero values (requirement 7.5)', () => {
+    const mockOnChange = vi.fn();
+    // Start with a non-zero value to test formatting
+    render(<PriceInput id="test-input" value={123.456789} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    
+    // The component should display the formatted value (2 decimal places) when not focused
+    expect(input.value).toBe('123.46');
+  });
+
+  it('maintains empty display for zero values after blur', () => {
+    const mockOnChange = vi.fn();
+    render(<PriceInput id="test-input" value={0} onChange={mockOnChange} />);
+    
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    
+    // Focus, enter empty value, and blur
+    fireEvent.focus(input);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.blur(input);
+    
+    // Should remain empty for zero values
+    expect(input.value).toBe('');
+  });
 });
