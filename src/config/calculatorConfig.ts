@@ -74,18 +74,18 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
 export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 1,
   inputs: [
-    { id: 'B1', x: 75, y: 25, color: 'green' },
-    { id: 'B2', x: 75, y: 85, color: 'green' }, // Shared between B3 and D2 calculations
-    { id: 'D1', x: -90, y: 175, color: 'red', label: 'PUT' }, // Moved to left as requested
-    { id: 'G1', x: -90, y: 255, color: 'green', label: 'CALL' }, // Moved to left as requested
-    { id: 'H1', x: 75, y: 365, color: 'red' }, // Shared between H3 and G2 calculations
-    { id: 'H2', x: 75, y: 425, color: 'red' },
+    { id: 'B1', x: 165, y: 25, color: 'green' },
+    { id: 'B2', x: 165, y: 85, color: 'green' }, // Shared between B3 and D2 calculations
+    { id: 'D1', x: 0, y: 175, color: 'red', label: 'PUT' }, // Moved to left as requested
+    { id: 'G1', x: 0, y: 255, color: 'green', label: 'CALL' }, // Moved to left as requested
+    { id: 'H1', x: 165, y: 365, color: 'red' }, // Shared between H3 and G2 calculations
+    { id: 'H2', x: 165, y: 425, color: 'red' },
   ],
   outputs: [
-    { id: 'B3', x: 250, y: 70, inputs: ['B1', 'B2'], position: 'right' },
-    { id: 'D2', x: 75, y: 190, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
-    { id: 'G2', x: 75, y: 270, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
-    { id: 'H3', x: 250, y: 410, inputs: ['H1', 'H2'], position: 'right' },
+    { id: 'B3', x: 340, y: 70, inputs: ['B1', 'B2'], position: 'right' },
+    { id: 'D2', x: 165, y: 190, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
+    { id: 'G2', x: 165, y: 270, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
+    { id: 'H3', x: 340, y: 410, inputs: ['H1', 'H2'], position: 'right' },
   ]
 };
 

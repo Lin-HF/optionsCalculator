@@ -7,6 +7,11 @@
   /* Removed background, border, and shadow for unified appearance */
 }
 
+/* Middle column styling - temporary background to see width */
+.calculator-column--middle {
+  min-width: 500px; /* Increased width for middle column */
+}
+
 .calculator-area {
   position: relative;
   min-height: 500px; /* Increased height for better spacing */
@@ -28,7 +33,7 @@
 .input-label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #007bff; /* Changed to blue */
+  color: #ffffff; /* Changed to blue */
   text-align: center;
   margin-bottom: 2px;
   letter-spacing: 0.5px;

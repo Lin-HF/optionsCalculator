@@ -72,9 +72,9 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
       
       if (a2Input && c1Input) {
         // Line 1: A2 bottom to C2 top (straight line) - shifted left
-        const a2BottomX = a2Input.x + inputWidth / 3 + 15; // Shifted left from center
+        const a2BottomX = a2Input.x + inputWidth / 3 + 28; // Shifted left from center
         const a2BottomY = a2Input.y + inputHeight - 20; // Bottom of A2
-        const c2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
+        const c2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 25; // Shifted left from center
         const c2TopY = output.y; // Top of C2
 
         lines.push(
@@ -117,9 +117,9 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
       
       if (e1Input && f1Input) {
         // Line 1: E1 top to F2 bottom (straight line) - shifted left
-        const e1TopX = e1Input.x + inputWidth / 3 + 16; // Shifted left from center
-        const e1TopY = e1Input.y; // Top of E1
-        const f2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
+        const e1TopX = e1Input.x + inputWidth / 3 + 28; // Shifted left from center
+        const e1TopY = e1Input.y + 25; // Top of E1
+        const f2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 25; // Shifted left from center
         const f2BottomY = output.y + CONNECTION_CONFIG.outputHeight - 10; // Bottom of F2
 
         lines.push(
@@ -162,9 +162,9 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
       
       if (b2Input && d1Input) {
         // Line 1: B2 bottom to D2 top (straight line) - shifted left
-        const b2BottomX = b2Input.x + inputWidth / 3 + 15; // Shifted left from center
+        const b2BottomX = b2Input.x + inputWidth / 3 + 28; // Shifted left from center
         const b2BottomY = b2Input.y + inputHeight - 20; // Bottom of B2
-        const d2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
+        const d2TopX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 25; // Shifted left from center
         const d2TopY = output.y; // Top of D2
 
         lines.push(
@@ -225,10 +225,10 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
         );
 
         // Line 2: G2 bottom to H1 top (straight line) - shifted left
-        const g2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 12; // Shifted left from center
+        const g2BottomX = output.x + CONNECTION_CONFIG.outputWidth / 3 + 25; // Shifted left from center
         const g2BottomY = output.y + CONNECTION_CONFIG.outputHeight - 10; // Bottom of G2
-        const h1TopX = h1Input.x + inputWidth / 3 + 17; // Shifted left from center
-        const h1TopY = h1Input.y; // Top of H1
+        const h1TopX = h1Input.x + inputWidth / 3 + 28; // Shifted left from center
+        const h1TopY = h1Input.y + 28; // Top of H1
 
         lines.push(
           <line
@@ -326,7 +326,7 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
   };
 
   return (
-    <div className="calculator-column">
+    <div className={`calculator-column ${columnIndex === 1 ? 'calculator-column--middle' : ''}`}>
       {/* Date header for this column */}
       <DateHeader weekOffset={weekOffset} />
       
