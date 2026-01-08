@@ -3,7 +3,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 110px; /* Match PriceInput width */
+  width: 110px; /* Increased to match PriceInput width */
 }
 
 /* Currency symbol styling - matching PriceInput */
@@ -26,8 +26,8 @@
   padding: 8px 12px 8px 20px; /* Match PriceInput padding */
   border: 2px solid #ccc; /* Neutral gray border for outputs */
   border-radius: 6px;
-  font-size: 1rem; /* Increased from 0.875rem for larger text */
-  font-weight: 700; /* Keep bold for easy reading */
+  font-size: 1.5rem; /* Increased to 2rem to match input */
+  font-weight: 900; /* Keep bold for easy reading */
   text-align: right;
   background-color: #ffffff;
   color: #000000; /* Enhanced black text */
