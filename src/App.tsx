@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import { CalculatorColumn } from './components';
-import { InputValues } from './types';
+import { CalculatorColumn, TabNavigation, SaveButton, HistoryTab } from './components';
+import { InputValues, TabType, HistorySnapshot } from './types';
 import { 
   validateConfiguration
 } from './config/calculatorConfig';
+import { historyService } from './services/HistoryService';
 
 function App() {
   // Validate configuration on app initialization
   validateConfiguration();
 
-  // Global state management for all input values
+  // Extended state management for data history functionality
   const [inputValues, setInputValues] = useState<InputValues>({
     // Left column (本周五)
     A1: 0,
@@ -35,12 +36,55 @@ function App() {
     J2: 0,
   });
 
-  // Handle state updates and propagation
+  // Tab state management
+  const [activeTab, setActiveTab] = useState<TabType>('main');
+  
+  // History data management
+  const [historySnapshots, setHistorySnapshots] = useState<HistorySnapshot[]>([]);
+  const [selectedHistorySnapshot, setSelectedHistorySnapshot] = useState<HistorySnapshot | null>(null);
+
+  // Load auto-saved data and history snapshots on component mount
+  useEffect(() => {
+    // Load auto-saved input values if available
+    const autoSavedData = historyService.loadAutoSave();
+    if (autoSavedData) {
+      setInputValues(autoSavedData);
+    }
+
+    // Load existing history snapshots
+    const snapshots = historyService.loadSnapshots();
+    setHistorySnapshots(snapshots);
+  }, []);
+
+  // Auto-save trigger on input changes
+  useEffect(() => {
+    // Trigger auto-save whenever input values change
+    // The HistoryService handles debouncing internally
+    historyService.autoSave(inputValues);
+  }, [inputValues]);
+
+  // Handle state updates and propagation with auto-save integration
   const handleValueChange = (id: string, value: number) => {
     setInputValues(prev => ({
       ...prev,
       [id]: value
     }));
+    // Auto-save is triggered by the useEffect above
+  };
+
+  // Handler functions for tab changes, manual saves, and snapshot selection
+  const handleTabChange = (tab: TabType) => {
+    setActiveTab(tab);
+  };
+
+  const handleManualSave = () => {
+    const snapshot = historyService.saveSnapshot(inputValues);
+    setHistorySnapshots(prev => [...prev, snapshot]);
+  };
+
+  const handleSnapshotSelect = (snapshotId: string) => {
+    const snapshot = historySnapshots.find(s => s.id === snapshotId) || null;
+    setSelectedHistorySnapshot(snapshot);
   };
 
   // Format current date for display
@@ -61,32 +105,54 @@ function App() {
         {getCurrentDate()}
       </div>
       
-      {/* Three-column layout structure */}
-      <div className="app-container">
-        {/* Left column - 本周五 */}
-        <CalculatorColumn
-          weekOffset={0}
-          columnIndex={0}
-          inputValues={inputValues}
-          onValueChange={handleValueChange}
+      {/* Tab navigation */}
+      <TabNavigation 
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
+      />
+      
+      {/* Conditional rendering based on active tab */}
+      {activeTab === 'main' ? (
+        <div className="main-tab">
+          {/* Three-column layout structure with save button inside */}
+          <div className="app-container">
+            {/* Save button positioned at bottom left inside the container */}
+            <div className="save-button-container">
+              <SaveButton onSave={handleManualSave} />
+            </div>
+            
+            {/* Left column - 本周五 */}
+            <CalculatorColumn
+              weekOffset={0}
+              columnIndex={0}
+              inputValues={inputValues}
+              onValueChange={handleValueChange}
+            />
+            
+            {/* Middle column - 下周五 */}
+            <CalculatorColumn
+              weekOffset={1}
+              columnIndex={1}
+              inputValues={inputValues}
+              onValueChange={handleValueChange}
+            />
+            
+            {/* Right column - 下下周五 */}
+            <CalculatorColumn
+              weekOffset={2}
+              columnIndex={2}
+              inputValues={inputValues}
+              onValueChange={handleValueChange}
+            />
+          </div>
+        </div>
+      ) : (
+        <HistoryTab
+          snapshots={historySnapshots}
+          selectedSnapshot={selectedHistorySnapshot}
+          onSnapshotSelect={handleSnapshotSelect}
         />
-        
-        {/* Middle column - 下周五 */}
-        <CalculatorColumn
-          weekOffset={1}
-          columnIndex={1}
-          inputValues={inputValues}
-          onValueChange={handleValueChange}
-        />
-        
-        {/* Right column - 下下周五 */}
-        <CalculatorColumn
-          weekOffset={2}
-          columnIndex={2}
-          inputValues={inputValues}
-          onValueChange={handleValueChange}
-        />
-      </div>
+      )}
     </div>
   );
 }

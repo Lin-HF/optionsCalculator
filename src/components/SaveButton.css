@@ -1,0 +1,214 @@
+/* SaveButton component styles - Consistent with existing design */
+.save-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+  min-width: 100px;
+  height: 40px;
+  position: relative;
+}
+
+.save-button:hover:not(.save-button--disabled):not(.save-button--loading) {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.25);
+}
+
+.save-button:focus {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.save-button:active:not(.save-button--disabled):not(.save-button--loading) {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Loading state */
+.save-button--loading {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.save-button--loading .save-button__text {
+  opacity: 0.7;
+}
+
+/* Success state */
+.save-button--success {
+  background-color: #28a745;
+  border-color: #28a745;
+  animation: success-pulse 0.3s ease-out;
+}
+
+.save-button--success:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.25);
+}
+
+/* Disabled state */
+.save-button--disabled {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.save-button--disabled:hover {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Button text */
+.save-button__text {
+  display: inline-block;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Loading spinner */
+.save-button__spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+  font-size: 1rem;
+  margin-left: 0.25rem;
+}
+
+/* Success checkmark */
+.save-button__checkmark {
+  display: inline-block;
+  font-size: 1rem;
+  margin-left: 0.25rem;
+  animation: checkmark-appear 0.3s ease-out;
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes success-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes checkmark-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Tablet responsive design */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .save-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+    min-width: 90px;
+    height: 36px;
+  }
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+  .save-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    min-width: 80px;
+    height: 32px;
+  }
+  
+  .save-button__spinner,
+  .save-button__checkmark {
+    font-size: 0.875rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .save-button {
+    padding: 0.4375rem 0.875rem;
+    font-size: 0.6875rem;
+    min-width: 70px;
+    height: 28px;
+  }
+  
+  .save-button__spinner,
+  .save-button__checkmark {
+    font-size: 0.75rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .save-button,
+  .save-button__text,
+  .save-button__spinner,
+  .save-button__checkmark {
+    animation: none;
+    transition: none;
+  }
+  
+  .save-button:hover:not(.save-button--disabled):not(.save-button--loading) {
+    transform: none;
+  }
+  
+  .save-button:active:not(.save-button--disabled):not(.save-button--loading) {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .save-button {
+    border-width: 3px;
+    font-weight: 700;
+  }
+  
+  .save-button:focus {
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  .save-button--success {
+    background-color: #1e7e34;
+    border-color: #1e7e34;
+  }
+  
+  .save-button--disabled {
+    background-color: #495057;
+    border-color: #495057;
+  }
+}

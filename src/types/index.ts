@@ -85,3 +85,75 @@ export interface PriceInputProps {
 export interface AverageDisplayProps {
   value: number;
 }
+
+// Data History Types
+
+// Storage keys for localStorage
+export enum StorageKeys {
+  AUTO_SAVE = 'price_calculator_auto_save',
+  HISTORY_SNAPSHOTS = 'price_calculator_history'
+}
+
+// Historical snapshot of calculator state
+export interface HistorySnapshot {
+  id: string;
+  timestamp: number;
+  inputValues: InputValues;
+  label?: string; // Optional user-defined label
+  displayName?: string; // Formatted display name with date/time for dropdown
+}
+
+// History service interface for data persistence
+export interface IHistoryService {
+  // Auto-save functionality
+  autoSave(inputValues: InputValues): void;
+  loadAutoSave(): InputValues | null;
+  
+  // Manual save functionality
+  saveSnapshot(inputValues: InputValues, label?: string): HistorySnapshot;
+  loadSnapshots(): HistorySnapshot[];
+  deleteSnapshot(id: string): void;
+  
+  // Storage management
+  clearAllData(): void;
+  getStorageInfo(): { used: number; available: number };
+  
+  // Error handling and recovery
+  getLastError(): string | null;
+  clearLastError(): void;
+  isStorageAvailable(): boolean;
+}
+
+// Tab navigation types
+export type TabType = 'main' | 'history';
+
+// Component prop interfaces for new data history components
+
+export interface TabNavigationProps {
+  activeTab: TabType;
+  onTabChange: (tab: TabType) => void;
+}
+
+export interface SaveButtonProps {
+  onSave: () => void;
+  disabled?: boolean;
+}
+
+export interface HistoryDropdownProps {
+  snapshots: HistorySnapshot[];
+  selectedSnapshotId: string | null;
+  onSnapshotSelect: (snapshotId: string) => void;
+}
+
+export interface HistoryTabProps {
+  snapshots: HistorySnapshot[];
+  selectedSnapshot: HistorySnapshot | null;
+  onSnapshotSelect: (snapshotId: string) => void;
+}
+
+// Extended App state for data history functionality
+export interface ExtendedAppState extends AppState {
+  activeTab: TabType;
+  historySnapshots: HistorySnapshot[];
+  selectedHistorySnapshot: HistorySnapshot | null;
+}
