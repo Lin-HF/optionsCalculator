@@ -97,7 +97,7 @@ This implementation plan converts the data history design into discrete coding t
     - Conditionally render main calculator or history tab
     - _Requirements: 3.1, 4.1, 8.1_
 
-  - [ ] 5.3 Write property test for tab state preservation
+  - [x] 5.3 Write property test for tab state preservation
     - **Property 8: Tab state preservation**
     - **Validates: Requirements 4.5, 8.4**
 

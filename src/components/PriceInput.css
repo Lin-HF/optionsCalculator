@@ -3,7 +3,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 110px; /* Increased from 110px for larger text */
+  width: 120px; /* Increased from 110px for wider input */
 }
 
 /* Currency symbol styling */
@@ -117,7 +117,7 @@
 /* Tablet responsive design */
 @media (max-width: 1024px) and (min-width: 769px) {
   .price-input-container {
-    width: 105px; /* Increased proportionally */
+    width: 120px; /* Increased proportionally */
   }
   
   .price-input {
@@ -134,7 +134,7 @@
 /* Mobile responsive design */
 @media (max-width: 768px) {
   .price-input-container {
-    width: 100px; /* Increased proportionally */
+    width: 115px; /* Increased proportionally */
   }
   
   .price-input {
