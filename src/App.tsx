@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { CalculatorColumn, TabNavigation, SaveButton, HistoryTab } from './components';
+import { CalculatorColumn, TabNavigation, SaveButton, ClearButton, HistoryTab } from './components';
 import { InputValues, TabType, HistorySnapshot } from './types';
 import { 
   validateConfiguration
@@ -82,9 +82,49 @@ function App() {
     setHistorySnapshots(prev => [...prev, snapshot]);
   };
 
+  const handleClearAll = () => {
+    const clearedValues: InputValues = {
+      // Left column (本周五)
+      A1: 0,
+      A2: 0,
+      C1: 0,
+      E1: 0,
+      E2: 0,
+      F1: 0,
+      
+      // Middle column (下周五)
+      B1: 0,
+      B2: 0,
+      D1: 0,
+      G1: 0,
+      H1: 0,
+      H2: 0,
+      
+      // Right column (下下周五)
+      I1: 0,
+      I2: 0,
+      J1: 0,
+      J2: 0,
+    };
+    setInputValues(clearedValues);
+  };
+
   const handleSnapshotSelect = (snapshotId: string) => {
     const snapshot = historySnapshots.find(s => s.id === snapshotId) || null;
     setSelectedHistorySnapshot(snapshot);
+  };
+
+  const handleSnapshotDelete = (snapshotId: string) => {
+    // Delete the snapshot using the history service
+    historyService.deleteSnapshot(snapshotId);
+    
+    // Update the local state by removing the deleted snapshot
+    setHistorySnapshots(prev => prev.filter(s => s.id !== snapshotId));
+    
+    // If the deleted snapshot was selected, clear the selection
+    if (selectedHistorySnapshot?.id === snapshotId) {
+      setSelectedHistorySnapshot(null);
+    }
   };
 
   // Format current date for display
@@ -116,9 +156,10 @@ function App() {
         <div className="main-tab">
           {/* Three-column layout structure with save button inside */}
           <div className="app-container">
-            {/* Save button positioned at bottom left inside the container */}
+            {/* Save and Clear buttons positioned at bottom left inside the container */}
             <div className="save-button-container">
               <SaveButton onSave={handleManualSave} />
+              <ClearButton onClear={handleClearAll} />
             </div>
             
             {/* Left column - 本周五 */}
@@ -151,6 +192,7 @@ function App() {
           snapshots={historySnapshots}
           selectedSnapshot={selectedHistorySnapshot}
           onSnapshotSelect={handleSnapshotSelect}
+          onSnapshotDelete={handleSnapshotDelete}
         />
       )}
     </div>

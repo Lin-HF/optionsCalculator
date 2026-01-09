@@ -49,7 +49,7 @@
 /* Save button container - positioned at bottom inside the graph */
 .save-button-container {
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 2rem;
   left: 1.5rem;
   right: 1.5rem;
   z-index: 10;

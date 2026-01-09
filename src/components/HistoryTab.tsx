@@ -1,12 +1,13 @@
 import React from 'react';
-import { CalculatorColumn } from './index';
+import { CalculatorColumn, DeleteButton } from './index';
 import { HistoryTabProps } from '../types';
 import './HistoryTab.css';
 
 const HistoryTab: React.FC<HistoryTabProps> = ({
   snapshots,
   selectedSnapshot,
-  onSnapshotSelect
+  onSnapshotSelect,
+  onSnapshotDelete
 }) => {
   // Empty state when no history exists
   if (snapshots.length === 0) {
@@ -34,6 +35,13 @@ const HistoryTab: React.FC<HistoryTabProps> = ({
       </div>
     );
   }
+
+  // Handle snapshot deletion
+  const handleDeleteSnapshot = () => {
+    if (selectedSnapshot) {
+      onSnapshotDelete(selectedSnapshot.id);
+    }
+  };
 
   // History dropdown for snapshot selection
   const renderHistoryDropdown = () => {
@@ -93,6 +101,14 @@ const HistoryTab: React.FC<HistoryTabProps> = ({
       {selectedSnapshot ? (
         <div className="history-calculator-container">
           <div className="app-container">
+            {/* Delete button positioned at bottom left inside the container */}
+            <div className="save-button-container">
+              <DeleteButton 
+                onDelete={handleDeleteSnapshot}
+                disabled={!selectedSnapshot}
+              />
+            </div>
+            
             {weekOffsets.map((weekOffset, index) => (
               <CalculatorColumn
                 key={`history-column-${index}`}

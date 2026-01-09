@@ -149,6 +149,7 @@ export interface HistoryTabProps {
   snapshots: HistorySnapshot[];
   selectedSnapshot: HistorySnapshot | null;
   onSnapshotSelect: (snapshotId: string) => void;
+  onSnapshotDelete: (snapshotId: string) => void;
 }
 
 // Extended App state for data history functionality
