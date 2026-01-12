@@ -550,11 +550,25 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
               zIndex: 2
             }}
           >
-            {/* Input labels hidden for cleaner appearance
-            <label className="input-label" htmlFor={input.id}>
-              {input.id}
-            </label>
-            */}
+            {/* Show PUT/CALL labels above the input boxes for C1, D1, F1, G1 */}
+            {input.label && (
+              <div 
+                className={`option-label option-label--${input.label.toLowerCase()}`}
+                style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: '-25px',
+                  transform: 'translateX(-50%)',
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                  color: input.color === 'red' ? '#dc2626' : '#16a34a',
+                  textAlign: 'center',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {input.label}
+              </div>
+            )}
             <PriceInput
               id={input.id}
               value={getInputValue(input.id)}
@@ -562,21 +576,6 @@ const CalculatorColumn: React.FC<CalculatorColumnProps> = ({
               placeholder="0"
               color={input.color}
             />
-            {/* Labels temporarily hidden for cleaner line visualization
-            {input.label && (
-              <span 
-                className={`external-option-label external-option-label--${input.label.toLowerCase()}`}
-                style={{
-                  position: 'absolute',
-                  left: (input.id === 'C1' || input.id === 'F1') ? '-30px' : '115px', // Left for C1/F1, right for D1/G1
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                }}
-              >
-                {input.label}
-              </span>
-            )}
-            */}
           </div>
         ))}
 
