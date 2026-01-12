@@ -102,7 +102,7 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
     { id: 'E2', x: 25, y: 425, width: 140, height: 48, color: 'red' }, // Moved down
   ],
   outputs: [
-    { id: 'A3', x: 300, y: 54, width: 120, height: 50, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
+    { id: 'A3', x: 300, y: 55, width: 120, height: 50, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
     { id: 'C2', x: -50, y: 180, width: 120, height: 50, inputs: ['A2', 'C1'], position: 'left' }, // Moved left from x=25 to x=5
     { id: 'F2', x: -50, y: 250, width: 120, height: 50, inputs: ['E1', 'F1'], position: 'left' }, // Moved left from x=25 to x=5
     { id: 'E3', x: 300, y: 394, width: 120, height: 50, inputs: ['E1', 'E2'], position: 'right' }, // Moved down

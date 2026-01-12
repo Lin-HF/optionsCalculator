@@ -50,6 +50,9 @@ describe('HistoryService', () => {
 
   describe('Auto-save functionality', () => {
     it('should save input values to localStorage with debouncing', async () => {
+      // Reset mocks after constructor calls
+      vi.clearAllMocks();
+      
       // Call autoSave
       historyService.autoSave(mockInputValues);
       
@@ -144,14 +147,20 @@ describe('HistoryService', () => {
 
   describe('Data validation', () => {
     it('should validate input values structure', async () => {
+      // Reset mocks after constructor calls
+      vi.clearAllMocks();
+      
       const invalidInputValues = { A1: 'invalid' } as any;
       
       // Should not throw during autoSave (graceful degradation)
       historyService.autoSave(invalidInputValues);
       await new Promise(resolve => setTimeout(resolve, 600));
       
-      // Should not have saved invalid data
-      expect(localStorageMock.setItem).not.toHaveBeenCalled();
+      // Should not have saved invalid data to AUTO_SAVE key
+      const autoSaveCalls = localStorageMock.setItem.mock.calls.filter(
+        call => call[0] === StorageKeys.AUTO_SAVE
+      );
+      expect(autoSaveCalls).toHaveLength(0);
     });
 
     it('should throw error for invalid input values in saveSnapshot', () => {
@@ -181,7 +190,12 @@ describe('HistoryService', () => {
       
       historyService.deleteSnapshot('delete');
       
-      const savedData = JSON.parse(localStorageMock.setItem.mock.calls[0][1]);
+      // Find the call that saves the updated snapshots (not the localStorage test call)
+      const setItemCalls = localStorageMock.setItem.mock.calls;
+      const snapshotCall = setItemCalls.find(call => call[0] === StorageKeys.HISTORY_SNAPSHOTS);
+      
+      expect(snapshotCall).toBeDefined();
+      const savedData = JSON.parse(snapshotCall![1]);
       expect(savedData).toHaveLength(1);
       expect(savedData[0].id).toBe('keep');
     });

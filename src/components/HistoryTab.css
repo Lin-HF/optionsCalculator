@@ -126,13 +126,11 @@
   margin: 0 auto;
 }
 
-.history-calculator-container .app-container {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e9ecef;
-  margin: 0;
+.history-calculator-container .app-container-unified {
   max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 4rem);
+  position: relative;
 }
 
 /* No Selection State */

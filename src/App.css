@@ -41,17 +41,23 @@
   position: relative;
 }
 
+/* Unified calculator layout */
+.app-container-unified {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 4rem);
+  position: relative;
+}
+
 /* Main tab container */
 .main-tab {
   width: 100%;
 }
 
-/* Save button container - positioned at bottom inside the graph */
+/* Save button container - positioned below the graph */
 .save-button-container {
-  position: absolute;
-  bottom: 2rem;
-  left: 1.5rem;
-  right: 1.5rem;
+  margin-top: 1rem;
+  padding: 0 1.5rem;
   z-index: 10;
 }
 
@@ -75,9 +81,8 @@
   }
   
   .save-button-container {
-    bottom: 0.5rem;
-    left: 1.25rem;
-    right: 1.25rem;
+    margin-top: 0.75rem;
+    padding: 0 1.25rem;
   }
 }
 
@@ -105,9 +110,8 @@
   }
   
   .save-button-container {
-    bottom: 0.5rem;
-    left: 1rem;
-    right: 1rem;
+    margin-top: 0.75rem;
+    padding: 0 1rem;
   }
 }
 
@@ -131,8 +135,7 @@
   }
   
   .save-button-container {
-    bottom: 0.5rem;
-    left: 0.75rem;
-    right: 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0 0.75rem;
   }
 }

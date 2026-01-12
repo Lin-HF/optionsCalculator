@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react'
 import App from './App'
 
 describe('App', () => {
-  it('renders three calculator columns', () => {
+  it('renders unified calculator layout', () => {
     render(<App />)
     
-    // Check that the app container is rendered
-    const appContainer = document.querySelector('.app-container')
+    // Check that the unified app container is rendered
+    const appContainer = document.querySelector('.app-container-unified')
     expect(appContainer).toBeInTheDocument()
   })
 
@@ -20,15 +20,15 @@ describe('App', () => {
     expect(dateHeaders).toHaveLength(3)
   })
 
-  it('has proper three-column grid layout', () => {
+  it('has proper unified layout', () => {
     render(<App />)
     
-    const appContainer = document.querySelector('.app-container')
-    expect(appContainer).toHaveClass('app-container')
+    const appContainer = document.querySelector('.app-container-unified')
+    expect(appContainer).toHaveClass('app-container-unified')
     
-    // Check that we have three calculator columns
-    const columns = document.querySelectorAll('.calculator-column')
-    expect(columns).toHaveLength(3)
+    // Check that we have the unified calculator component
+    const unifiedCalculator = document.querySelector('.unified-calculator')
+    expect(unifiedCalculator).toBeInTheDocument()
   })
 
   it('manages global state for all input values', () => {

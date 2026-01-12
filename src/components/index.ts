@@ -3,6 +3,7 @@ export { default as AverageDisplay } from './AverageDisplay';
 export { default as DateHeader } from './DateHeader';
 export { default as CalculatorGroup } from './CalculatorGroup';
 export { default as CalculatorColumn } from './CalculatorColumn';
+export { default as UnifiedCalculator } from './UnifiedCalculator';
 export { default as TabNavigation } from './TabNavigation';
 export { default as SaveButton } from './SaveButton';
 export { default as ClearButton } from './ClearButton';

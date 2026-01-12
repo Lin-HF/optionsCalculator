@@ -1,5 +1,5 @@
 import React from 'react';
-import { CalculatorColumn, DeleteButton } from './index';
+import { UnifiedCalculator, DeleteButton } from './index';
 import { HistoryTabProps } from '../types';
 import './HistoryTab.css';
 
@@ -85,39 +85,28 @@ const HistoryTab: React.FC<HistoryTabProps> = ({
     return `${dateStr} ${timeStr}`;
   };
 
-  // Calculate week offsets for the three columns (same as main page)
-  const getWeekOffsets = () => {
-    return [0, 1, 2]; // This week, next week, week after next
-  };
-
-  const weekOffsets = getWeekOffsets();
-
   return (
     <div className="history-tab">
       {/* History dropdown */}
       {renderHistoryDropdown()}
       
-      {/* Calculator display area - same layout as main page */}
+      {/* Calculator display area - unified layout like main page */}
       {selectedSnapshot ? (
         <div className="history-calculator-container">
-          <div className="app-container">
-            {/* Delete button positioned at bottom left inside the container */}
+          <div className="app-container-unified">
+            {/* Unified calculator with historical data (read-only) */}
+            <UnifiedCalculator
+              inputValues={selectedSnapshot.inputValues}
+              onValueChange={() => {}} // Read-only in history view
+            />
+            
+            {/* Delete button positioned below the graph */}
             <div className="save-button-container">
               <DeleteButton 
                 onDelete={handleDeleteSnapshot}
                 disabled={!selectedSnapshot}
               />
             </div>
-            
-            {weekOffsets.map((weekOffset, index) => (
-              <CalculatorColumn
-                key={`history-column-${index}`}
-                weekOffset={weekOffset}
-                columnIndex={index}
-                inputValues={selectedSnapshot.inputValues}
-                onValueChange={() => {}} // Read-only in history view
-              />
-            ))}
           </div>
         </div>
       ) : (

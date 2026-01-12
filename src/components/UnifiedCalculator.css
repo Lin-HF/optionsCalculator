@@ -1,0 +1,74 @@
+.unified-calculator {
+  width: 100%;
+  min-height: 500px;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  padding: 2rem;
+  min-width: 1200px; /* Ensure minimum width for the expanded layout */
+}
+
+.date-headers {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.date-header-container {
+  position: absolute;
+}
+
+.calculator-area {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  margin-top: 3rem; /* Space for date headers */
+}
+
+.connection-lines {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+.input-container {
+  position: absolute;
+}
+
+.output-container {
+  position: absolute;
+}
+
+.option-label {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+  .unified-calculator {
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+  
+  .calculator-area {
+    min-width: 1200px; /* Ensure minimum width for all elements */
+  }
+}
+
+@media (max-width: 768px) {
+  .unified-calculator {
+    padding: 1rem;
+  }
+  
+  .date-header-container .date-header .date-title {
+    font-size: 1rem;
+  }
+  
+  .calculator-area {
+    margin-top: 2.5rem;
+  }
+}

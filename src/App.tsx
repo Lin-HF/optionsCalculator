@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { CalculatorColumn, TabNavigation, SaveButton, ClearButton, HistoryTab } from './components';
+import { UnifiedCalculator, TabNavigation, SaveButton, ClearButton, HistoryTab } from './components';
 import { InputValues, TabType, HistorySnapshot } from './types';
 import { 
   validateConfiguration
@@ -154,37 +154,19 @@ function App() {
       {/* Conditional rendering based on active tab */}
       {activeTab === 'main' ? (
         <div className="main-tab">
-          {/* Three-column layout structure with save button inside */}
-          <div className="app-container">
-            {/* Save and Clear buttons positioned at bottom left inside the container */}
+          {/* Unified calculator layout */}
+          <div className="app-container-unified">
+            {/* Unified calculator with all inputs and outputs */}
+            <UnifiedCalculator
+              inputValues={inputValues}
+              onValueChange={handleValueChange}
+            />
+            
+            {/* Save and Clear buttons positioned below the graph */}
             <div className="save-button-container">
               <SaveButton onSave={handleManualSave} />
               <ClearButton onClear={handleClearAll} />
             </div>
-            
-            {/* Left column - 本周五 */}
-            <CalculatorColumn
-              weekOffset={0}
-              columnIndex={0}
-              inputValues={inputValues}
-              onValueChange={handleValueChange}
-            />
-            
-            {/* Middle column - 下周五 */}
-            <CalculatorColumn
-              weekOffset={1}
-              columnIndex={1}
-              inputValues={inputValues}
-              onValueChange={handleValueChange}
-            />
-            
-            {/* Right column - 下下周五 */}
-            <CalculatorColumn
-              weekOffset={2}
-              columnIndex={2}
-              inputValues={inputValues}
-              onValueChange={handleValueChange}
-            />
           </div>
         </div>
       ) : (
