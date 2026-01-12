@@ -86,19 +86,19 @@
   }
 }
 
-/* Mobile layout - vertical stacking with enhanced spacing */
-@media (max-width: 768px) {
+/* iPad Portrait and smaller tablets */
+@media (max-width: 768px) and (min-width: 481px) {
   .app-container {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    padding: 1.5rem;
+    gap: 2rem;
+    padding: 1.25rem;
     min-height: auto;
     border-radius: 8px;
   }
   
   .app {
-    padding: 1.5rem;
+    padding: 1.25rem;
     min-height: 100vh;
   }
   
@@ -115,16 +115,20 @@
   }
 }
 
-/* Small mobile devices - Compact but usable */
+/* Mobile layout - vertical stacking with enhanced spacing */
 @media (max-width: 480px) {
   .app-container {
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     padding: 1rem;
+    min-height: auto;
     border-radius: 6px;
   }
   
   .app {
     padding: 1rem;
+    min-height: 100vh;
   }
   
   .current-date {

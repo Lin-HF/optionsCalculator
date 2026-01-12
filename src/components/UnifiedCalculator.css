@@ -59,16 +59,58 @@
   }
 }
 
-@media (max-width: 768px) {
+/* iPad Landscape - Scale down to fit */
+@media (max-width: 1024px) and (min-width: 769px) {
   .unified-calculator {
     padding: 1rem;
+    transform: scale(0.75);
+    transform-origin: top left;
+    width: 133.33%; /* Compensate for 0.75 scale */
+    min-width: 1600px; /* Compensate for scale */
+  }
+  
+  .calculator-area {
+    min-width: 1200px;
+    margin-top: 3rem;
+  }
+  
+  .date-header-container .date-header .date-title {
+    font-size: 1.2rem; /* Larger to compensate for scale */
+  }
+}
+
+/* iPad Portrait and smaller tablets */
+@media (max-width: 768px) and (min-width: 481px) {
+  .unified-calculator {
+    padding: 1rem;
+    overflow-x: auto;
+    min-width: 900px; /* Optimized for iPad portrait */
+  }
+  
+  .calculator-area {
+    min-width: 900px;
+    margin-top: 2.5rem;
   }
   
   .date-header-container .date-header .date-title {
     font-size: 1rem;
   }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .unified-calculator {
+    padding: 0.75rem;
+    overflow-x: auto;
+    min-width: 800px; /* Minimum for mobile */
+  }
   
   .calculator-area {
-    margin-top: 2.5rem;
+    min-width: 800px;
+    margin-top: 2rem;
+  }
+  
+  .date-header-container .date-header .date-title {
+    font-size: 0.9rem;
   }
 }
