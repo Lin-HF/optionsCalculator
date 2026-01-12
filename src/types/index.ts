@@ -158,3 +158,38 @@ export interface ExtendedAppState extends AppState {
   historySnapshots: HistorySnapshot[];
   selectedHistorySnapshot: HistorySnapshot | null;
 }
+
+// Line drawing types for graph connections
+export interface LineSegment {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  orientation: 'horizontal' | 'vertical';
+}
+
+export interface ArrowLinesResult {
+  lines: LineSegment[];
+  connectionPoints: {
+    a1: { x: number; y: number };
+    a2: { x: number; y: number };
+    b1: { x: number; y: number };
+    b2: { x: number; y: number };
+    c1: { x: number; y: number };
+    c2: { x: number; y: number };
+    d1: { x: number; y: number };
+    d2: { x: number; y: number };
+  };
+}
+
+export type LlineRotation = 'bottomLeftCorner' | 'bottomRightCorner' | 'topLeftCorner' | 'topRightCorner';
+
+export interface LlinesResult {
+  lines: LineSegment[];
+  connectionPoints: {
+    v1: { x: number; y: number };
+    v2: { x: number; y: number };
+    h1: { x: number; y: number };
+    h2: { x: number; y: number };
+  };
+}

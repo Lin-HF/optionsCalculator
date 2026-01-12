@@ -3,7 +3,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 120px; /* Increased from 110px for wider input */
+  width: 140px; /* Increased from 120px for wider input */
 }
 
 /* Currency symbol styling */
@@ -31,8 +31,8 @@
 /* Base price input styling */
 .price-input {
   width: 100%;
-  height: 40px;
-  padding: 8px 12px 8px 20px; /* Reverted right padding */
+  height: 48px; /* Increased from 40px for taller input */
+  padding: 10px 12px 10px 20px; /* Increased vertical padding from 8px to 10px */
   border: 2px solid;
   border-radius: 6px;
   font-size: 1.5rem; /* Increased from 0.875rem to 1rem */
@@ -117,11 +117,12 @@
 /* Tablet responsive design */
 @media (max-width: 1024px) and (min-width: 769px) {
   .price-input-container {
-    width: 120px; /* Increased proportionally */
+    width: 135px; /* Increased proportionally from 120px */
   }
   
   .price-input {
-    padding: 7px 10px 7px 18px; /* Reverted right padding */
+    height: 44px; /* Increased from default */
+    padding: 9px 10px 9px 18px; /* Increased vertical padding */
     font-size: 13px;
   }
   
@@ -134,11 +135,12 @@
 /* Mobile responsive design */
 @media (max-width: 768px) {
   .price-input-container {
-    width: 115px; /* Increased proportionally */
+    width: 130px; /* Increased proportionally from 115px */
   }
   
   .price-input {
-    padding: 6px 8px 6px 16px; /* Reverted right padding */
+    height: 42px; /* Increased from default */
+    padding: 8px 8px 8px 16px; /* Increased vertical padding */
     font-size: 13px;
   }
   
@@ -151,11 +153,12 @@
 /* Small mobile devices */
 @media (max-width: 480px) {
   .price-input-container {
-    width: 95px; /* Increased proportionally */
+    width: 110px; /* Increased proportionally from 95px */
   }
   
   .price-input {
-    padding: 5px 6px 5px 14px; /* Reverted right padding */
+    height: 40px; /* Increased from default */
+    padding: 7px 6px 7px 14px; /* Increased vertical padding */
     font-size: 12px;
   }
   

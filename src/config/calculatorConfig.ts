@@ -2,6 +2,7 @@
 // This file defines the complete calculator layout with shared input positioning
 
 import { CalculationConfig } from '../types';
+import { BorderMidpoints, calculateBorderMidpoints } from '../utils/positionUtils';
 
 // Central calculation configuration object
 // Maps output IDs to their input dependencies and display positions
@@ -28,20 +29,58 @@ export interface InputPosition {
   id: string;
   x: number; // Horizontal position (pixels from left)
   y: number; // Vertical position (pixels from top)
+  width: number; // Element width
+  height: number; // Element height
   color: 'red' | 'green'; // Color coding for the input
   label?: string; // Optional label like "PUT" or "CALL"
+}
+
+// Enhanced input position class with border midpoint calculations
+export class CalculatorInput implements InputPosition {
+  constructor(
+    public id: string,
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number,
+    public color: 'red' | 'green',
+    public label?: string
+  ) {}
+  
+  get position(): BorderMidpoints {
+    return calculateBorderMidpoints(this.x, this.y, this.width, this.height);
+  }
 }
 
 export interface OutputPosition {
   id: string;
   x: number; // Horizontal position (pixels from left)
   y: number; // Vertical position (pixels from top)
+  width: number; // Element width
+  height: number; // Element height
   inputs: string[]; // Input IDs this output depends on
   position: 'left' | 'right' | 'top' | 'bottom'; // Position relative to inputs
   // 'left': Output positioned to the left of inputs
   // 'right': Output positioned to the right of inputs  
   // 'top': Output positioned above inputs
   // 'bottom': Output positioned below inputs
+}
+
+// Enhanced output position class with border midpoint calculations
+export class CalculatorOutput implements OutputPosition {
+  constructor(
+    public id: string,
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number,
+    public inputs: string[],
+    public position: 'left' | 'right' | 'top' | 'bottom'
+  ) {}
+  
+  get borderMidpoints(): BorderMidpoints {
+    return calculateBorderMidpoints(this.x, this.y, this.width, this.height);
+  }
 }
 
 // Column layout configuration with absolute positioning
@@ -55,18 +94,18 @@ export interface ColumnLayout {
 export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 0,
   inputs: [
-    { id: 'A1', x: 25, y: 25, color: 'green' },
-    { id: 'A2', x: 25, y: 85, color: 'green' }, // Shared between A3 and C2 calculations
-    { id: 'C1', x: 220, y: 175, color: 'red', label: 'PUT' }, // Moved to right as requested
-    { id: 'F1', x: 220, y: 255, color: 'green', label: 'CALL' }, // Moved above E group
-    { id: 'E1', x: 25, y: 365, color: 'red' }, // Shared between E3 and F2 calculations - moved down
-    { id: 'E2', x: 25, y: 425, color: 'red' }, // Moved down
+    { id: 'A1', x: 25, y: 25, width: 140, height: 48, color: 'green' },
+    { id: 'A2', x: 25, y: 85, width: 140, height: 48, color: 'green' }, // Shared between A3 and C2 calculations
+    { id: 'C1', x: 220, y: 175, width: 140, height: 48, color: 'red', label: 'PUT' }, // Moved to right as requested
+    { id: 'F1', x: 220, y: 255, width: 140, height: 48, color: 'green', label: 'CALL' }, // Moved above E group
+    { id: 'E1', x: 25, y: 365, width: 140, height: 48, color: 'red' }, // Shared between E3 and F2 calculations - moved down
+    { id: 'E2', x: 25, y: 425, width: 140, height: 48, color: 'red' }, // Moved down
   ],
   outputs: [
-    { id: 'A3', x: 300, y: 70, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
-    { id: 'C2', x: 25, y: 190, inputs: ['A2', 'C1'], position: 'left' }, // Moved down to avoid overlap with A2
-    { id: 'F2', x: 25, y: 270, inputs: ['E1', 'F1'], position: 'left' }, // Moved above E group
-    { id: 'E3', x: 300, y: 410, inputs: ['E1', 'E2'], position: 'right' }, // Moved down
+    { id: 'A3', x: 300, y: 54, width: 120, height: 50, inputs: ['A1', 'A2'], position: 'right' }, // Adjusted to better center between A1 and A2
+    { id: 'C2', x: -50, y: 180, width: 120, height: 50, inputs: ['A2', 'C1'], position: 'left' }, // Moved left from x=25 to x=5
+    { id: 'F2', x: -50, y: 250, width: 120, height: 50, inputs: ['E1', 'F1'], position: 'left' }, // Moved left from x=25 to x=5
+    { id: 'E3', x: 300, y: 394, width: 120, height: 50, inputs: ['E1', 'E2'], position: 'right' }, // Moved down
   ]
 };
 
@@ -74,18 +113,18 @@ export const LEFT_COLUMN_LAYOUT: ColumnLayout = {
 export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 1,
   inputs: [
-    { id: 'B1', x: 165, y: 25, color: 'green' },
-    { id: 'B2', x: 165, y: 85, color: 'green' }, // Shared between B3 and D2 calculations
-    { id: 'D1', x: 0, y: 175, color: 'red', label: 'PUT' }, // Moved to left as requested
-    { id: 'G1', x: 0, y: 255, color: 'green', label: 'CALL' }, // Moved to left as requested
-    { id: 'H1', x: 165, y: 365, color: 'red' }, // Shared between H3 and G2 calculations
-    { id: 'H2', x: 165, y: 425, color: 'red' },
+    { id: 'B1', x: 165, y: 25, width: 140, height: 48, color: 'green' },
+    { id: 'B2', x: 165, y: 85, width: 140, height: 48, color: 'green' }, // Shared between B3 and D2 calculations
+    { id: 'D1', x: 0, y: 175, width: 140, height: 48, color: 'red', label: 'PUT' }, // Moved to left as requested
+    { id: 'G1', x: 0, y: 255, width: 140, height: 48, color: 'green', label: 'CALL' }, // Moved to left as requested
+    { id: 'H1', x: 165, y: 365, width: 140, height: 48, color: 'red' }, // Shared between H3 and G2 calculations
+    { id: 'H2', x: 165, y: 425, width: 140, height: 48, color: 'red' },
   ],
   outputs: [
-    { id: 'B3', x: 340, y: 70, inputs: ['B1', 'B2'], position: 'right' },
-    { id: 'D2', x: 165, y: 190, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
-    { id: 'G2', x: 165, y: 270, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
-    { id: 'H3', x: 340, y: 410, inputs: ['H1', 'H2'], position: 'right' },
+    { id: 'B3', x: 340, y: 54, width: 120, height: 50, inputs: ['B1', 'B2'], position: 'right' },
+    { id: 'D2', x: 250, y: 180, width: 120, height: 50, inputs: ['B2', 'D1'], position: 'right' }, // Moved to right as requested
+    { id: 'G2', x: 250, y: 250, width: 120, height: 50, inputs: ['G1', 'H1'], position: 'right' }, // Moved to right as requested
+    { id: 'H3', x: 340, y: 394, width: 120, height: 50, inputs: ['H1', 'H2'], position: 'right' },
   ]
 };
 
@@ -93,14 +132,14 @@ export const MIDDLE_COLUMN_LAYOUT: ColumnLayout = {
 export const RIGHT_COLUMN_LAYOUT: ColumnLayout = {
   weekOffset: 2,
   inputs: [
-    { id: 'I1', x: 25, y: 25, color: 'green' },
-    { id: 'I2', x: 25, y: 85, color: 'green' },
-    { id: 'J1', x: 25, y: 365, color: 'red' },
-    { id: 'J2', x: 25, y: 425, color: 'red' },
+    { id: 'I1', x: 25, y: 25, width: 140, height: 48, color: 'green' },
+    { id: 'I2', x: 25, y: 85, width: 140, height: 48, color: 'green' },
+    { id: 'J1', x: 25, y: 365, width: 140, height: 48, color: 'red' },
+    { id: 'J2', x: 25, y: 425, width: 140, height: 48, color: 'red' },
   ],
   outputs: [
-    { id: 'I3', x: 200, y: 70, inputs: ['I1', 'I2'], position: 'right' },
-    { id: 'J3', x: 200, y: 410, inputs: ['J1', 'J2'], position: 'right' },
+    { id: 'I3', x: 200, y: 54, width: 120, height: 50, inputs: ['I1', 'I2'], position: 'right' },
+    { id: 'J3', x: 200, y: 394, width: 120, height: 50, inputs: ['J1', 'J2'], position: 'right' },
   ]
 };
 
@@ -111,7 +150,73 @@ export const COLUMN_LAYOUTS = [
   RIGHT_COLUMN_LAYOUT
 ];
 
-// Helper function to get all input IDs used in the calculator
+// Helper function to create enhanced input elements with position properties
+export const createEnhancedInputs = (layout: ColumnLayout): CalculatorInput[] => {
+  return layout.inputs.map(input => 
+    new CalculatorInput(
+      input.id,
+      input.x,
+      input.y,
+      input.width,
+      input.height,
+      input.color,
+      input.label
+    )
+  );
+};
+
+// Helper function to create enhanced output elements with position properties
+export const createEnhancedOutputs = (layout: ColumnLayout): CalculatorOutput[] => {
+  return layout.outputs.map(output => 
+    new CalculatorOutput(
+      output.id,
+      output.x,
+      output.y,
+      output.width,
+      output.height,
+      output.inputs,
+      output.position
+    )
+  );
+};
+
+// Helper function to get enhanced input by ID with position properties
+export const getEnhancedInputById = (inputId: string, layout: ColumnLayout): CalculatorInput | null => {
+  const input = layout.inputs.find(inp => inp.id === inputId);
+  if (!input) {
+    console.warn(`Input ${inputId} not found in layout`);
+    return null;
+  }
+  
+  return new CalculatorInput(
+    input.id,
+    input.x,
+    input.y,
+    input.width,
+    input.height,
+    input.color,
+    input.label
+  );
+};
+
+// Helper function to get enhanced output by ID with position properties
+export const getEnhancedOutputById = (outputId: string, layout: ColumnLayout): CalculatorOutput | null => {
+  const output = layout.outputs.find(out => out.id === outputId);
+  if (!output) {
+    console.warn(`Output ${outputId} not found in layout`);
+    return null;
+  }
+  
+  return new CalculatorOutput(
+    output.id,
+    output.x,
+    output.y,
+    output.width,
+    output.height,
+    output.inputs,
+    output.position
+  );
+};
 export const getAllInputIds = (): string[] => {
   const inputIds = new Set<string>();
   

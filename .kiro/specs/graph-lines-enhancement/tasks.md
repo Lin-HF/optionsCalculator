@@ -6,18 +6,18 @@ This implementation plan converts the graph lines enhancement design into a seri
 
 ## Tasks
 
-- [ ] 1. Create border midpoint position system
+- [x] 1. Create border midpoint position system
 - Create utility functions for calculating border midpoints from element dimensions
 - Add position getter properties to input/output elements
 - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6_
 
-- [ ]* 1.1 Write property tests for border midpoint calculations
+- [x]* 1.1 Write property tests for border midpoint calculations
   - **Property 1: Border midpoint mathematical correctness**
   - **Property 2: Position object completeness**
   - **Validates: Requirements 1.2, 1.3, 1.4, 1.5, 1.6**
 
 - [ ] 2. Implement arrowLines function
-- [ ] 2.1 Create arrowLines function with TypeScript interfaces
+- [x] 2.1 Create arrowLines function with TypeScript interfaces
   - Write function that generates 4 line segments (3 horizontal, 1 vertical)
   - Implement connection logic: a1→a2, b1→b2, c1→c2, d1→d2 with proper connectivity
   - Calculate horizontal line lengths as 1/2 x-distance between inputs and output
@@ -36,7 +36,7 @@ This implementation plan converts the graph lines enhancement design into a seri
   - Test edge cases and error conditions
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
-- [ ] 3. Remove existing line drawing system
+- [x] 3. Remove existing line drawing system
 - Remove all generateConnectionLines logic from CalculatorColumn.tsx
 - Remove special case handling for C2, F2, D2, and G2 connections
 - Preserve all input/output positioning exactly as configured
@@ -49,34 +49,34 @@ This implementation plan converts the graph lines enhancement design into a seri
   - **Validates: Requirements 4.2, 4.4, 8.1, 8.2, 8.3**
 
 - [ ] 4. Apply arrowLines to multi-input calculations
-- [ ] 4.1 Integrate arrowLines for calculation A (A1,A2 → A3)
+- [x] 4.1 Integrate arrowLines for calculation A (A1,A2 → A3)
   - Replace existing line logic with arrowLines function call
   - Use border midpoint positions from input/output elements
   - _Requirements: 5.1_
 
-- [ ] 4.2 Integrate arrowLines for calculation B (B1,B2 → B3)
+- [x] 4.2 Integrate arrowLines for calculation B (B1,B2 → B3)
   - Apply arrowLines function to middle column calculation
   - _Requirements: 5.2_
 
-- [ ] 4.3 Integrate arrowLines for calculation E (E1,E2 → E3)
+- [x] 4.3 Integrate arrowLines for calculation E (E1,E2 → E3)
   - Apply arrowLines function to left column bottom calculation
   - _Requirements: 5.3_
 
-- [ ] 4.4 Integrate arrowLines for calculation H (H1,H2 → H3)
+- [x] 4.4 Integrate arrowLines for calculation H (H1,H2 → H3)
   - Apply arrowLines function to middle column bottom calculation
   - _Requirements: 5.4_
 
-- [ ] 4.5 Integrate arrowLines for calculations I and J (I1,I2 → I3, J1,J2 → J3)
+- [x] 4.5 Integrate arrowLines for calculations I and J (I1,I2 → I3, J1,J2 → J3)
   - Apply arrowLines function to right column calculations
   - _Requirements: 5.5, 5.6_
 
-- [ ] 5. Checkpoint - Test arrowLines implementation
+- [-] 5. Checkpoint - Test arrowLines implementation
 - Ensure all arrowLines are rendering correctly
 - Verify calculations and localStorage functionality remain unchanged
 - Ask user for feedback and adjustments
 
 - [ ] 6. Implement Llines function
-- [ ] 6.1 Create Llines function with rotation support
+- [x] 6.1 Create Llines function with rotation support
   - Write function that generates 2 line segments (1 vertical, 1 horizontal)
   - Implement rotation logic for bottomLeftCorner, bottomRightCorner, topLeftCorner, topRightCorner
   - Ensure v2 connects to h1 at corner point
@@ -96,20 +96,22 @@ This implementation plan converts the graph lines enhancement design into a seri
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8_
 
 - [ ] 7. Apply Llines to cross-input calculations
-- [ ] 7.1 Integrate Llines for connection A2,C1 → C2
+- [x] 7.1 Integrate Llines for connection A2,C1 → C2
   - Replace existing line logic with Llines function call
   - Determine appropriate rotation based on element positions
+  - Hidden input labels for cleaner line visualization
+  - Adjusted A2 starting point up by 10 pixels for better visual alignment
   - _Requirements: 6.1_
 
-- [ ] 7.2 Integrate Llines for connection D1,B2 → D2
+- [x] 7.2 Integrate Llines for connection D1,B2 → D2
   - Apply Llines function to middle column cross-connection
   - _Requirements: 6.2_
 
-- [ ] 7.3 Integrate Llines for connection E1,F1 → F2
+- [x] 7.3 Integrate Llines for connection E1,F1 → F2
   - Apply Llines function to left column cross-connection
   - _Requirements: 6.3_
 
-- [ ] 7.4 Integrate Llines for connection G1,H1 → G2
+- [x] 7.4 Integrate Llines for connection G1,H1 → G2
   - Apply Llines function to middle column cross-connection
   - _Requirements: 6.4_
 
