@@ -152,11 +152,20 @@ export interface HistoryTabProps {
   onSnapshotDelete: (snapshotId: string) => void;
 }
 
+// Validation error type
+export interface ValidationError {
+  pairId: string; // e.g., "A1-A2"
+  message: string;
+  firstInput: string;
+  secondInput: string;
+}
+
 // Extended App state for data history functionality
 export interface ExtendedAppState extends AppState {
   activeTab: TabType;
   historySnapshots: HistorySnapshot[];
   selectedHistorySnapshot: HistorySnapshot | null;
+  validationErrors: ValidationError[];
 }
 
 // Line drawing types for graph connections

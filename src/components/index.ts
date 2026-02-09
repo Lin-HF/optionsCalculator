@@ -9,3 +9,4 @@ export { default as SaveButton } from './SaveButton';
 export { default as ClearButton } from './ClearButton';
 export { default as DeleteButton } from './DeleteButton';
 export { default as HistoryTab } from './HistoryTab';
+export { default as ErrorDisplay } from './ErrorDisplay';

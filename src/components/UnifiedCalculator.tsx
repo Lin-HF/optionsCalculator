@@ -2,6 +2,7 @@ import React from 'react';
 import PriceInput from './PriceInput';
 import AverageDisplay from './AverageDisplay';
 import DateHeader from './DateHeader';
+import ErrorDisplay from './ErrorDisplay';
 import { calculateAverage } from '../utils/calculationUtils';
 import { 
   LEFT_COLUMN_LAYOUT, 
@@ -10,6 +11,7 @@ import {
   ColumnLayout
 } from '../config/calculatorConfig';
 import { arrowLines, Llines } from '../utils/lineUtils';
+import { validateAllInputPairs, getErrorForPair, INPUT_PAIRS } from '../utils/validationUtils';
 import './UnifiedCalculator.css';
 
 interface UnifiedCalculatorProps {
@@ -21,6 +23,11 @@ const UnifiedCalculator: React.FC<UnifiedCalculatorProps> = ({
   inputValues,
   onValueChange
 }) => {
+  // Validate all input pairs whenever inputValues change
+  const validationErrors = React.useMemo(() => {
+    return validateAllInputPairs(inputValues);
+  }, [inputValues]);
+
   const getInputValue = (id: string): number => {
     return inputValues[id] || 0;
   };
@@ -544,6 +551,29 @@ const UnifiedCalculator: React.FC<UnifiedCalculatorProps> = ({
                 value={outputValue}
               />
             </div>
+          );
+        })}
+
+        {/* Render validation errors for each input pair */}
+        {INPUT_PAIRS.map(([firstId, secondId]) => {
+          const error = getErrorForPair(validationErrors, firstId, secondId);
+          if (!error) return null;
+
+          // Find the position of the second input (error appears below it)
+          const secondInput = allInputs.find(input => input.id === secondId);
+          if (!secondInput) return null;
+
+          const errorPosition = {
+            x: secondInput.x,
+            y: secondInput.y + secondInput.height + 5 // 5px below the input
+          };
+
+          return (
+            <ErrorDisplay
+              key={error.pairId}
+              error={error}
+              position={errorPosition}
+            />
           );
         })}
       </div>
