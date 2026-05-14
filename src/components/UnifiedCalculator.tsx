@@ -3,6 +3,7 @@ import PriceInput from './PriceInput';
 import AverageDisplay from './AverageDisplay';
 import DateHeader from './DateHeader';
 import ErrorDisplay from './ErrorDisplay';
+import StrikePriceTable from './StrikePriceTable';
 import { calculateAverage } from '../utils/calculationUtils';
 import { 
   LEFT_COLUMN_LAYOUT, 
@@ -553,6 +554,19 @@ const UnifiedCalculator: React.FC<UnifiedCalculatorProps> = ({
             </div>
           );
         })}
+
+        {/* Strike Price Table - positioned between I and J calculators in the right column */}
+        <div
+          className="strike-price-container"
+          style={{
+            position: 'absolute',
+            left: '950px',
+            top: '150px',
+            zIndex: 2
+          }}
+        >
+          <StrikePriceTable />
+        </div>
 
         {/* Render validation errors for each input pair */}
         {INPUT_PAIRS.map(([firstId, secondId]) => {

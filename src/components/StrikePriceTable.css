@@ -1,0 +1,58 @@
+.strike-price-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+/* Neutral color variant for the strike price input (same style as PriceInput, just different color) */
+.strike-price-neutral {
+  border-color: #6b7280 !important;
+  color: #333 !important;
+}
+
+.strike-price-neutral:focus {
+  border-color: #4b5563 !important;
+  box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.25) !important;
+}
+
+.strike-price-neutral:hover {
+  border-color: #4b5563 !important;
+  box-shadow: 0 0 0 1px rgba(107, 114, 128, 0.1) !important;
+}
+
+.strike-price-neutral::placeholder {
+  color: #999;
+}
+
+.strike-table {
+  border-collapse: collapse;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  table-layout: fixed;
+  width: 280px;
+}
+
+.strike-cell {
+  padding: 4px 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.strike-cell--header {
+  color: #6b7280;
+}
+
+.strike-cell--label {
+  padding-right: 8px;
+}
+
+.strike-cell--green {
+  color: #16a34a;
+}
+
+.strike-cell--red {
+  color: #dc2626;
+}

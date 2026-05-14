@@ -7,13 +7,14 @@
 }
 
 /* Currency symbol styling */
+/* Currency symbol styling */
 .currency-symbol {
   position: absolute;
   left: 8px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 2rem; /* Match input text size */
+  font-weight: 700; /* Match input font weight */
   color: #333; /* Default color */
   z-index: 1;
   pointer-events: none;
