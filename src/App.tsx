@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { UnifiedCalculator, TabNavigation, SaveButton, ClearButton, HistoryTab } from './components';
+import StrikeTab from './components/StrikeTab';
 import { InputValues, TabType, HistorySnapshot } from './types';
 import { 
   validateConfiguration
@@ -169,6 +170,8 @@ function App() {
             </div>
           </div>
         </div>
+      ) : activeTab === 'strike' ? (
+        <StrikeTab />
       ) : (
         <HistoryTab
           snapshots={historySnapshots}

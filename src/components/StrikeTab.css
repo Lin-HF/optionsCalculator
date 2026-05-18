@@ -1,0 +1,51 @@
+.strike-tab {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+}
+
+.strike-tab__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  justify-items: center;
+  align-items: start;
+}
+
+/* Scale up numbers slightly from the default, but keep it contained */
+.strike-tab .strike-price-table {
+  gap: 12px;
+}
+
+.strike-tab .strike-table {
+  width: 520px;
+  border-spacing: 12px 0;
+}
+
+.strike-tab .strike-cell {
+  padding: 6px 8px;
+  font-size: 2rem;
+}
+
+.strike-tab .strike-cell--label {
+  padding-right: 20px;
+}
+
+.strike-tab .price-input {
+  font-size: 2rem;
+  height: 56px;
+}
+
+.strike-tab .price-input-container {
+  width: 160px;
+}
+
+.strike-tab .currency-symbol {
+  font-size: 2rem;
+}

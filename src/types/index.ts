@@ -125,7 +125,7 @@ export interface IHistoryService {
 }
 
 // Tab navigation types
-export type TabType = 'main' | 'history';
+export type TabType = 'main' | 'strike' | 'history';
 
 // Component prop interfaces for new data history components
 

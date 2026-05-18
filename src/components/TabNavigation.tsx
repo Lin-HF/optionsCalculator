@@ -14,6 +14,13 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange })
           Main
         </button>
         <button
+          className={`tab-button ${activeTab === 'strike' ? 'active' : ''}`}
+          onClick={() => onTabChange('strike')}
+          type="button"
+        >
+          Strike
+        </button>
+        <button
           className={`tab-button ${activeTab === 'history' ? 'active' : ''}`}
           onClick={() => onTabChange('history')}
           type="button"
