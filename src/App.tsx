@@ -171,7 +171,9 @@ function App() {
           </div>
         </div>
       ) : activeTab === 'strike' ? (
-        <StrikeTab />
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <StrikeTab />
+        </div>
       ) : (
         <HistoryTab
           snapshots={historySnapshots}
